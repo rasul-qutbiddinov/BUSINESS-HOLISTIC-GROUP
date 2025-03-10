@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+.custom-swiper .swiper-pagination-bullets {
+    bottom: -20px;
+    /* ✅ Nuqtalarni sal pastroqqa tushirdim */
+}
+
+.custom-swiper .swiper-pagination-bullet {
+    background-color: rgba(255, 255, 255, 0.3);
+    /* ✅ Oddiy nuqtalar */
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.custom-swiper .swiper-pagination-bullet-active {
+    background-color: #14b8a6;
+    /* ✅ Faol nuqta (ko'k) */
+    transform: scale(1.2);
+    /* ✅ Faol nuqta kattalashadi */
+}
+/* Swiper progress bar uchun CSS */
+.custom-swiper .swiper-pagination-progressbar {
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3);
+    /* ✅ Oddiy progress bar */
+    margin-top: 10px;
+}
+
+.custom-swiper .swiper-pagination-progressbar-fill {
+    background-color: #14b8a6;
+    /* ✅ Faol progress bar */
+    transition: width 0.3s ease;
+}
+/* Partners kartochkalari uchun hover effekti */
+.partner-card {
+    transition: transform 0.3s ease;
+}
+
+.partner-card:hover {
+    transform: scale(1.05);
+}
