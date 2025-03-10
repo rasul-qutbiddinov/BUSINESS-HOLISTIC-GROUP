@@ -1,5 +1,5 @@
 import Navbar from "./navbar";
-import Image1 from "../assets/header-image.jpeg"; // Fayl kengaytmasini qo‘shdim
+import Image1 from "../assets/Vector-14.png"; // Fayl kengaytmasini qo‘shdim
 
 export default function Header() {
   return (
