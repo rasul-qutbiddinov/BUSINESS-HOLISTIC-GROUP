@@ -1,4 +1,5 @@
 import Navbar from "./navbar";
+import Image1 from "../assets/header-image.jpeg"; // Fayl kengaytmasini qo‘shdim
 
 export default function Header() {
   return (
@@ -17,20 +18,18 @@ export default function Header() {
           </p>
 
           <div className="flex justify-center md:justify-start gap-4">
-            <button className="bg-gray-700 active:bg-teal-500 px-6 py-2 rounded-xl  hover:bg-teal-400">
+            <button className="bg-teal-500 active:bg-teal-600 px-6 py-2 rounded-xl  hover:bg-teal-400 transition-colors">
               Get Started
             </button>
-            <button className="bg-gray-700 active:bg-teal-500 px-6 py-2 rounded-xl font-medium hover:bg-teal-400">
+            <button className="bg-gray-700 active:bg-teal-500 px-6 py-2 rounded-xl font-medium hover:bg-teal-400 transition-colors">
               See Our Work
             </button>
           </div>
         </div>
-        <div className="flex-2 relative group w-full max-w-md md:max-w-xl">
+
+        <div className="flex-1 relative group w-full max-w-md md:max-w-xl">
           <img
-            src="/src/assets/header-image.jpeg"
-
-
-            
+            src={Image1}
             className="object-cover w-full h-full rounded-2xl shadow-lg"
             alt="Team Working"
           />
