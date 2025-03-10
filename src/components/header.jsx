@@ -1,5 +1,5 @@
 import Navbar from "./navbar";
-import Image1 from "../assets/Vector-14"
+import Image1 from "../assets/header-image.jpeg"
 
 export default function Header() {
   return (
