@@ -28,6 +28,9 @@ export default function Header() {
         <div className="flex-2 relative group w-full max-w-md md:max-w-xl">
           <img
             src="/src/assets/header-image.jpeg"
+
+
+            
             className="object-cover w-full h-full rounded-2xl shadow-lg"
             alt="Team Working"
           />
