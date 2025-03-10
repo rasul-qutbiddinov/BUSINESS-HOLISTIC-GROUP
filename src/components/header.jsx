@@ -1,4 +1,5 @@
 import Navbar from "./navbar";
+import Image1 from "../assets/Vector-14"
 
 export default function Header() {
   return (
@@ -52,7 +53,7 @@ export default function Header() {
         <div className="flex-2 relative group w-full md:w-auto">
           <div className="relative rounded-3xl shadow-lg overflow-hidden bg-[#4CCED0]">
             <img
-              src="/src/assets/header-image.jpeg"
+              src={Image1}
               className="object-cover w-full h-full transition-transform duration-300 group-hover:translate-x-[-20px] group-hover:translate-y-[-20px]"
               alt="Team Working"
             />
