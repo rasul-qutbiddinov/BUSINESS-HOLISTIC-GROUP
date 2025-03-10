@@ -65,7 +65,11 @@ const Contact = () => {
         </div>
 
         {/* Kontakt ma'lumotlari pastda */}
-        <div className="flex flex-row gap-10 text-white/80 mt-12">
+        <div className="flex flex-col gap-10 text-white/80 mt-12">
+          <div className="flex items-center gap-4">
+            <MapPin size={24} className="text-teal-500" />
+            <span>Qorasaroy 39A</span>
+          </div>
           <div className="flex items-center gap-4">
             <Mail size={24} className="text-teal-500" />
             <span>saidoff@gmail.com</span>
