@@ -161,8 +161,8 @@ const About = () => {
             placeholder="+998 -- --- -- --"
             className="bg-[#011727] text-white rounded-md p-2 w-full sm:flex-1"
           />
-          <button className="bg-teal-400 text-white px-6 py-2 rounded-lg hover:bg-teal-300 transition-colors w-full sm:w-auto">
-            Submit <Rocket size={16} />
+          <button className="bg-teal-400 flex flex-row gap-2 text-white px-10 py-2 rounded-lg hover:bg-teal-300 transition-colors w-full sm:w-auto">
+            Submit <Rocket size={16}  />
           </button>
         </div>
       </section>
