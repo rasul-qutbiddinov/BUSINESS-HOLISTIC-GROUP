@@ -1,8 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Facebook, Instagram, Linkedin, Send } from "lucide-react";
 import Logo from "../assets/LOGO.png";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
   return (
     <footer className="bg-[#012B3D] text-white py-6 md:py-8 mt-0">
       <div className="max-w-[1920px] mx-auto px-4 md:px-8 flex flex-col items-center gap-6 md:gap-8">
@@ -10,28 +13,28 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 md:gap-6 text-center md:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-sm">
             <a href="/" className="hover:text-teal-400 transition-colors">
-              HOME
+              {t("home")}
             </a>
             <a href="/about" className="hover:text-teal-400 transition-colors">
-              ABOUT US
+              {t("about")}
             </a>
             <a
               href="/services"
               className="hover:text-teal-400 transition-colors"
             >
-              SERVICES
+              {t("services")}
             </a>
             <a
               href="/contact"
               className="hover:text-teal-400 transition-colors"
             >
-              CONTACT US
+              {t("contact")}
             </a>
             <a
               href="/comments"
               className="hover:text-teal-400 transition-colors"
             >
-              COMMENTS
+              {t("comments")}
             </a>
           </div>
 

@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import Logo from "../assets/LOGO.png";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
+  const { t, i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -11,13 +13,16 @@ const Navbar = () => {
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    setDropdownOpen(false);
+  };
+
   const closeDropdown = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
       setDropdownOpen(false);
     }
   };
-
-  const closeSidebar = () => setSidebarOpen(false);
 
   useEffect(() => {
     document.addEventListener("mousedown", closeDropdown);
@@ -34,43 +39,52 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-4 lg:gap-8 font-medium bg-[#1B4055] text-white px-4 py-2 lg:px-6 rounded-[30px] mx-auto justify-center">
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/">Home</Link>
+            <Link to="/">{t("home")}</Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/about">About Us</Link>
+            <Link to="/about">{t("about")}</Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/services">Services</Link>
+            <Link to="/services">{t("services")}</Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/contact">Contact Us</Link>
+            <Link to="/contact">{t("contact")}</Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/comments">Comments</Link>
+            <Link to="/comments">{t("comments")}</Link>
           </li>
         </ul>
 
-        {/* PC Language Button (o'ng tomon burchakda) */}
+        {/* Language Selector */}
         <div className="hidden md:flex items-center gap-4 absolute right-10">
           <div className="relative">
             <button
               onClick={toggleDropdown}
               className="bg-[#1B4055] text-white px-4 py-2 rounded-[30px] flex items-center"
             >
-              🌐 ENG
+              🌐 {i18n.language.toUpperCase()}
             </button>
             {dropdownOpen && (
               <ul
                 className="absolute right-0 mt-2 bg-[#1B4055] text-white border border-teal-500 rounded-lg shadow-lg overflow-hidden z-50"
                 ref={dropdownRef}
               >
-                <li className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition">
+                <li
+                  className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition"
+                  onClick={() => changeLanguage("eng")}
+                >
                   Eng
                 </li>
-                <li className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition">
+                <li
+                  className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition"
+                  onClick={() => changeLanguage("uzb")}
+                >
                   Uzb
                 </li>
-                <li className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition">
+                <li
+                  className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition"
+                  onClick={() => changeLanguage("rus")}
+                >
                   Rus
                 </li>
               </ul>
@@ -78,35 +92,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Language Button (o'ng tomon burchakda, sidebar tashqarisida) */}
-        <div className="md:hidden flex items-center absolute right-14">
-          <div className="relative">
-            <button
-              onClick={toggleDropdown}
-              className="bg-[#1B4055] text-white px-4 py-2 rounded-[30px] flex items-center"
-            >
-              🌐 ENG
-            </button>
-            {dropdownOpen && (
-              <ul
-                className="absolute right-0 mt-2 bg-[#1B4055] text-white border border-teal-500 rounded-lg shadow-lg overflow-hidden z-50"
-                ref={dropdownRef}
-              >
-                <li className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition">
-                  Eng
-                </li>
-                <li className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition">
-                  Uzb
-                </li>
-                <li className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition">
-                  Rus
-                </li>
-              </ul>
-            )}
-          </div>
-        </div>
-
-        {/* Sidebar Toggle Button (Mobile) */}
+        {/* Mobile Sidebar Button */}
         <button
           className="md:hidden text-white text-3xl focus:outline-none absolute right-4"
           onClick={toggleSidebar}
@@ -115,13 +101,6 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Overlay (Sidebar uchun) */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-opacity-50 z-40"
-          onClick={closeSidebar}
-        ></div>
-      )}
       {/* Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-64 bg-[#012B3D] text-white transform ${
@@ -130,7 +109,7 @@ const Navbar = () => {
       >
         <button
           className="text-white text-3xl m-4 focus:outline-none"
-          onClick={closeSidebar}
+          onClick={() => setSidebarOpen(false)}
         >
           <X size={30} />
         </button>
@@ -138,53 +117,31 @@ const Navbar = () => {
         {/* Sidebar Links */}
         <ul className="flex flex-col gap-4 px-8 py-4 text-lg">
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/" onClick={closeSidebar}>
-              Home
+            <Link to="/" onClick={() => setSidebarOpen(false)}>
+              {t("home")}
             </Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/about" onClick={closeSidebar}>
-              About Us
+            <Link to="/about" onClick={() => setSidebarOpen(false)}>
+              {t("about")}
             </Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/services" onClick={closeSidebar}>
-              Services
+            <Link to="/services" onClick={() => setSidebarOpen(false)}>
+              {t("services")}
             </Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/contact" onClick={closeSidebar}>
-              Contact Us
+            <Link to="/contact" onClick={() => setSidebarOpen(false)}>
+              {t("contact")}
             </Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/comments" onClick={closeSidebar}>
-              Comments
+            <Link to="/comments" onClick={() => setSidebarOpen(false)}>
+              {t("comments")}
             </Link>
           </li>
         </ul>
-
-        <div className="absolute bottom-0 w-full text-center pb-4 border-t border-teal-500 mt-4">
-          <div className="flex flex-col items-center gap-2 px-8 text-sm text-white/80 py-4">
-            <img
-              src={Logo}
-              alt="Logo"
-              className="h-14 w-30 object-contain mb-2"
-            />
-            <a
-              href="mailto:businessholistic@group"
-              className="hover:text-teal-400 transition-colors"
-            >
-              businessholistic@group
-            </a>
-            <a
-              href="tel:+998997776655"
-              className="hover:text-teal-400 transition-colors"
-            >
-              +998 99 777 66 55
-            </a>
-          </div>
-        </div>
       </div>
     </div>
   );

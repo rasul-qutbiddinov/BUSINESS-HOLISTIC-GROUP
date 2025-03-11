@@ -8,6 +8,8 @@ import Contact from "./Contact/contact";
 import Comments from "./Comments/comments";
 import BackToTopButton from "./components/Back-to-top";
 import Navbar from "./components/navbar";
+import '../i18n';
+
 
 export default function App() {
   return (

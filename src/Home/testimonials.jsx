@@ -53,7 +53,7 @@ const TestimonialsCard = () => {
 
   return (
     <section className="bg-[#012B3D] mb-0 py-16 relative">
-      <div className="container mx-auto px-8 text-center relative">
+      <div className="container mx-auto px-2 text-center relative">
         <h2 className="text-4xl font-bold text-white mb-4">
           What Our Client Say
         </h2>
