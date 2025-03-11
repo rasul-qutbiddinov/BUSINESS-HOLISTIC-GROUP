@@ -129,6 +129,7 @@ const About = () => {
         <h2 className="text-2xl md:text-3xl font-bold mb-8">
           Companies that believe in us
         </h2>
+        
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {[...Array(12)].map((_, i) => (
@@ -145,7 +146,6 @@ const About = () => {
           ))}
         </div>
       </section>
-
       <section className="py-10 bg-[#011727] flex flex-col items-center justify-center gap-6 max-w-[1200px] mx-auto mb-20 px-4">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
           Stay in the know:
