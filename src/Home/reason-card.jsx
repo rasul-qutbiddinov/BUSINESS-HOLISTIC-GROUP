@@ -47,8 +47,8 @@ const Reasons = () => {
               <h3 className="text-xl font-semibold mb-3">{reason.title}</h3>
               <p className="text-sm">{reason.description}</p>
 
-              <span className="absolute bottom-0 left-0 h-1 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
-              <span className="absolute bottom-0 right-0 w-1 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
+              <span className="absolute bottom-0 left-0 h-3 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute bottom-0 right-0 w-3 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
             </div>
           ))}
 
@@ -57,8 +57,8 @@ const Reasons = () => {
             <h3 className="text-xl font-semibold mb-3">{reasons[2].title}</h3>
             <p className="text-sm">{reasons[2].description}</p>
 
-            <span className="absolute bottom-0 left-0 h-1 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
-            <span className="absolute bottom-0 right-0 w-1 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
+            <span className="absolute bottom-0 left-0 h-3 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
+            <span className="absolute bottom-0 right-0 w-3 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
           </div>
         </div>
 
@@ -68,8 +68,8 @@ const Reasons = () => {
           <p className="text-sm mb-4">{reasons[3].description}</p>
           <p className="text-sm">{reasons[3].description}</p>
 
-          <span className="absolute bottom-0 left-0 h-1 w-0 bg-teal-500 transition-all duration-500 group-hover:w-full"></span>
-          <span className="absolute bottom-0 right-0 w-1 h-0 bg-teal-500 transition-all duration-500 group-hover:h-full"></span>
+          <span className="absolute bottom-0 left-0 h-3 w-0 bg-teal-500 transition-all duration-500 group-hover:w-full"></span>
+          <span className="absolute bottom-0 right-0 w-3 h-0 bg-teal-500 transition-all duration-500 group-hover:h-full"></span>
         </div>
       </div>
     </section>

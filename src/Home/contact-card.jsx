@@ -43,7 +43,7 @@ const ContactCard = () => {
           Stay in the know:
         </h2>
         <a
-          href="#contact"
+          href="/contact"
           className="text-teal-500 text-sm font-semibold hover:underline mt-2 sm:mt-0"
         >
           CONTACT US

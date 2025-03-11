@@ -88,8 +88,8 @@ const ServicesCard = () => {
             </div>
             <p className="mt-2 text-gray-300 text-sm">{service.description}</p>
 
-            <span className="absolute bottom-0 left-0 h-1 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
-            <span className="absolute bottom-0 right-0 w-1 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
+            <span className="absolute bottom-0 left-0 h-3 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
+            <span className="absolute bottom-0 right-0 w-3 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
           </div>
         ))}
       </div>

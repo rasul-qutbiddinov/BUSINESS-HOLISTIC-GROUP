@@ -17,7 +17,7 @@ const AboutCard = () => {
       ></div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10 w-full max-w-6xl">
-        {/* Text Section (Order 1 on small screens, Order 2 on large screens) */}
+        {/* Text Section */}
         <div className="flex flex-col justify-center gap-4 max-w-lg w-full mx-auto text-center lg:text-left order-1 lg:order-2">
           <div className="text-sm font-semibold text-teal-500 uppercase tracking-wide flex items-center justify-center lg:justify-start gap-2">
             <span className="h-px w-8 bg-teal-500"></span> IN THE WORLD
@@ -41,7 +41,7 @@ const AboutCard = () => {
             principle in our work is trust.
           </p>
 
-          <div className="mt-4 flex  flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <div className="mt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
             <button className="bg-gray-200 active:bg-teal-500 text-teal-400 px-6 py-2 rounded-lg hover:bg-teal-400 hover:text-white flex items-center gap-2 transition w-full sm:w-auto">
               <Edit2 size={16} /> Fill in brief
             </button>
@@ -51,20 +51,27 @@ const AboutCard = () => {
           </div>
         </div>
 
-        {/* Images Section (Order 2 on small screens, Order 1 on large screens) */}
+        {/* Images Section */}
         <div className="flex flex-col items-center gap-6 relative z-20 order-2 lg:order-1">
-          <div className="space-y-4 relative">
+          {/* Rasm 1 */}
+          <div className="relative group">
+            <div className="absolute w-full h-full bg-transparent transition-all duration-300 ease-in-out group-hover:bg-blue-500 rounded-2xl group-hover:translate-x-3 group-hover:translate-y-3"></div>
             <img
               src={About1}
-              className="rounded-2xl object-cover shadow-lg w-full max-w-md h-auto border-[2px] border-blue-300"
+              className="relative rounded-2xl object-cover shadow-lg w-full max-w-md h-auto border-[4px] border-transparent transition-all duration-300 ease-in-out group-hover:border-blue-500 group-hover:translate-x-3 group-hover:translate-y-3"
               alt="Team meeting"
             />
           </div>
-          <img
-            src={About2}
-            className="rounded-2xl object-cover shadow-lg w-full max-w-md h-auto border-[2px] border-blue-300"
-            alt="Team discussing"
-          />
+
+          {/* Rasm 2 */}
+          <div className="relative group">
+            <div className="absolute w-full h-full bg-transparent transition-all duration-300 ease-in-out group-hover:bg-blue-500 rounded-2xl group-hover:translate-x-3 group-hover:translate-y-3"></div>
+            <img
+              src={About2}
+              className="relative rounded-2xl object-cover shadow-lg w-full max-w-md h-auto border-[4px] border-transparent transition-all duration-300 ease-in-out group-hover:border-blue-500 group-hover:translate-x-3 group-hover:translate-y-3"
+              alt="Team discussing"
+            />
+          </div>
         </div>
       </div>
     </section>
