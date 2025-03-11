@@ -31,7 +31,8 @@ const Navbar = () => {
 
   return (
     <div className="relative">
-      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-4 bg-[#012B3D] shadow-md w-full max-w-full">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-4 md:px-8 py-4 bg-[#012B3D] shadow-md w-full">
+        {/* Logo */}
         <a href="/" className="flex items-center gap-2 max-w-xs">
           <img src={Logo} className="h-12 w-auto md:h-20 md:w-40" alt="Logo" />
         </a>
@@ -55,8 +56,8 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Language Selector */}
-        <div className="hidden md:flex items-center gap-4 absolute right-10">
+        {/* Language Selector - ALWAYS VISIBLE */}
+        <div className="flex items-center gap-4 absolute right-15 md:relative">
           <div className="relative">
             <button
               onClick={toggleDropdown}
@@ -128,7 +129,7 @@ const Navbar = () => {
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
             <Link to="/services" onClick={() => setSidebarOpen(false)}>
-              {t("services")}
+              {t("services")} 
             </Link>
           </li>
           <li className="hover:text-teal-300 cursor-pointer">
