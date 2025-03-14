@@ -42,8 +42,8 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-4 lg:gap-8 font-medium bg-[#1B4055] text-white px-4 py-2 lg:px-6 rounded-[30px] mx-auto justify-center">
-          {NavbarData.map((item) => (
-            <li className="hover:text-teal-300 cursor-pointer">
+          {NavbarData.map((item,index) => (
+            <li key={index} className="hover:text-teal-300 cursor-pointer">
               <Link
                 to={`/${lang}/${item.text}`}
                 onClick={() => changeLanguage(lang)}
@@ -115,8 +115,8 @@ const Navbar = () => {
 
         {/* Sidebar Links */}
         <ul className="flex flex-col gap-4 px-8 py-4 text-lg">
-          {NavbarData.map((item) => (
-            <li className="hover:text-teal-300 cursor-pointer">
+          {NavbarData.map((item,index) => (
+            <li key={index} className="hover:text-teal-300 cursor-pointer">
               <Link
                 to={`/${lang}/${item.text}`}
                 onClick={() => setSidebarOpen(false)}

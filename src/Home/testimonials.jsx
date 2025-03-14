@@ -1,115 +1,133 @@
 import React, { useRef, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
+import { Quote } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import "../index.css"; // Custom CSS
-
-const testimonials = [
-  {
-    id: 1,
-    name: "Leslie Alexander",
-    image: "https://randomuser.me/api/portraits/women/1.jpg",
-    feedback:
-      "We develop websites with the high quality, from corporate websites to web applications.",
-  },
-  {
-    id: 2,
-    name: "Leslie Alexander",
-    image: "https://randomuser.me/api/portraits/men/1.jpg",
-    feedback:
-      "We develop websites with the high quality, from corporate websites to web applications.",
-  },
-  {
-    id: 3,
-    name: "Leslie Alexander",
-    image: "https://randomuser.me/api/portraits/men/2.jpg",
-    feedback:
-      "We develop websites with the high quality, from corporate websites to web applications.",
-  },
-  {
-    id: 4,
-    name: "Leslie Alexander",
-    image: "https://randomuser.me/api/portraits/women/2.jpg",
-    feedback:
-      "We develop websites with the high quality, from corporate websites to web applications.",
-  },
-];
+import useParseHTML from "../components/hooks";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import TestimonialsItem from "../components/testimonials_item";
+import "../index.css";
 
 const TestimonialsCard = () => {
+  useEffect(() => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      setTimeout(() => {
+        swiperRef.current.swiper.navigation.update();
+      }, 100);
+    }
+  }, []);
+  // Swiper navigation references
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const swiperRef = useRef(null);
 
-  useEffect(() => {
-    if (swiperRef.current && swiperRef.current.navigation) {
-      setTimeout(() => {
-        swiperRef.current.navigation.update();
-      }, 100); // 🔄 `setTimeout` bilan `navigation`ni yangilaymiz!
-    }
-  }, []);
+  const { parseHTMLString } = useParseHTML();
+  const { lang } = useParams();
+
+  // Fetch testimonials from API
+  const { data, error, isError, isLoading } = useQuery({
+    queryKey: ["comments_titles"],
+    queryFn: () =>
+      fetch(
+        "https://back.holistic.saidoff.uz/api/collections/comments_titles/records/37f53pi047p45b3?expand=title,comments"
+      ).then((res) => {
+        if (!res.ok) {
+          throw new Error(`HTTP Error! Status: ${res.status}`);
+        }
+        return res.json();
+      }),
+  });
+
+
+  // Handle errors and loading states
+  if (isError) {
+    console.error("Error fetching data:", error);
+    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
+  }
+
+  if (isLoading) {
+    return <p className="text-white text-center">Yuklanmoqda...</p>;
+  }
+
+  // Extract title and testimonials
+  const title =
+    data?.expand?.title?.[lang] ||
+    data?.expand?.title?.uz ||
+    "No title available";
+
+  const commentIds = data?.comments || [];
 
   return (
-    <section className="bg-[#012B3D] mb-0 py-16 relative">
-      <div className="container mx-auto px-2 text-center relative">
-        <h2 className="text-4xl font-bold text-white mb-4">
-          What Our Client Say
-        </h2>
-        <p className="text-teal-400 mb-6">TESTIMONIALS</p>
+    <section className="bg-[#012B3D] py-16 relative">
+      <div className="container mx-auto px-4 text-center">
+        <h2
+          className="text-4xl font-bold text-white mb-4"
+          dangerouslySetInnerHTML={{ __html: parseHTMLString(title) }}
+        />
+        <p className="text-teal-400 uppercase tracking-wide text-sm mb-6">
+          TESTIMONIALS
+        </p>
 
-        <Swiper
-          ref={swiperRef}
-          slidesPerView={3}
-          spaceBetween={10}
-          loop={true}
-          autoplay={{
-            delay: 2000,
-            disableOnInteraction: false,
-          }}
-          navigation={{
-            nextEl: nextRef.current,
-            prevEl: prevRef.current,
-          }}
-          onInit={(swiper) => {
-            if (swiper && swiper.navigation) {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-              swiper.navigation.init();
-              swiper.navigation.update();
-            }
-          }}
-          pagination={false}
-          breakpoints={{
-            240: { slidesPerView: 1, spaceBetween: 5 }, // Mobil uchun kichik hajm
-            640: { slidesPerView: 2, spaceBetween: 10 },
-            1024: { slidesPerView: 3, spaceBetween: 15 },
-          }}
-          modules={[Pagination, Autoplay, Navigation]}
-          className="mb-12 testimonials-swiper relative"
-        >
-          {testimonials.map((testimonial) => (
-            <SwiperSlide key={testimonial.id}>
-              <div className="bg-[#0A1722] text-white p-4 md:p-10 rounded-xl shadow-md relative w-full max-w-xs mx-2 md:mx-4 transform transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-l-8 md:hover:border-l-16 hover:border-teal-400">
-                <Quote className="text-teal-400 mb-2 md:mb-4" size={24} />
-                <p className="mb-4 md:mb-6 text-sm md:text-base">
-                  {testimonial.feedback}
+        {/* Swiper for Testimonials */}
+        {commentIds.length > 0 ? (
+          <Swiper
+            ref={swiperRef}
+            slidesPerView={1} // ✅ Start with 1 slide per view for responsiveness
+            spaceBetween={20} // ✅ Adds spacing
+            loop={true}
+            autoplay={{
+              delay: 3000, // ✅ Smooth autoplay
+              disableOnInteraction: false,
+            }}
+            navigation={{
+              nextEl: nextRef.current,
+              prevEl: prevRef.current,
+            }}
+            pagination={{ clickable: true }}
+            breakpoints={{
+              1024: { slidesPerView: 3, spaceBetween: 30 }, // ✅ 3 slides on desktop
+            }}
+            modules={[Pagination, Autoplay, Navigation]}
+            className="relative max-w-6xl mx-auto" // ✅ Centers the Swiper
+          >
+            {commentIds.length > 0 ? (
+              commentIds.map((commentId) => (
+                <SwiperSlide key={commentId}>
+                  <TestimonialsItem id={commentId} />
+                </SwiperSlide>
+              ))
+            ) : (
+              <SwiperSlide>
+                <p className="text-gray-400 text-center">
+                  No testimonials available.
                 </p>
-                <div className="flex items-center gap-2 md:gap-4">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-10 md:w-12 h-10 md:h-12 rounded-full border-2 border-teal-400"
-                  />
-                  <span className="font-semibold text-sm md:text-base">
-                    {testimonial.name}
-                  </span>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            )}
+          </Swiper>
+        ) : (
+          <p className="text-gray-400 text-center">
+            No testimonials available.
+          </p>
+        )}
+
+        {/* Swiper Navigation */}
+        <div className="flex justify-center gap-6 mt-6">
+          <button
+            ref={prevRef}
+            className="text-white bg-gray-800 rounded-full p-3 shadow-lg transition"
+          >
+            ❮
+          </button>
+          <button
+            ref={nextRef}
+            className="text-white bg-gray-800 rounded-full p-3 shadow-lg  transition"
+          >
+            ❯
+          </button>
+        </div>
       </div>
     </section>
   );
