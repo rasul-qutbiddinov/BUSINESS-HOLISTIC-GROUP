@@ -1,9 +1,13 @@
+import { useLanguage } from "../hooks/useLanguage";
 import useParseHTML from "./hooks";
 import Navbar from "./navbar";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const { parseHTMLString } = useParseHTML();
+  const { i18n } = useTranslation();
+  const { lang } = useLanguage();
 
   const { error, data, isError, isSuccess } = useQuery({
     queryKey: ["hero"],
@@ -17,13 +21,44 @@ export default function Header() {
   console.log("success", isSuccess);
   if (isError) console.log("Error", error);
 
-  const record = data?.items?.[0];  
-  const collectionName = record?.collectionId || "home_page"; 
-  const id = record?.id; 
+  if (!isSuccess) {
+    return <p className="text-white text-center">Yuklanmoqda...</p>;
+  }
+
+  const record = data?.items?.[0];
+  const collectionName = record?.collectionId || "home_page";
+  const id = record?.id;
   const image = record?.image;
+
+  const languageMap = {
+    uz: "uz",
+    en: "en",
+    ru: "ru",
+  };
+
+  const currentLanguage = languageMap[i18n.language] || "uz";
+
+  const title =
+    record?.expand?.title?.[lang] ||
+    record?.expand?.title?.uz ||
+    "No title available";
   const description =
-    record?.expand?.description?.en || "Loading description...";
-  const title = record?.expand?.title?.en || "Loading title...";
+    record?.expand?.description?.[lang] ||
+    record?.expand?.description?.uz ||
+    "No description available";
+
+  // console.log("Foydalanuvchi tili:", i18n.language);
+  // console.log("API uchun mos til:", currentLanguage);
+  // console.log("Kelgan title obyekt:", record?.expand?.title);
+  // console.log(
+  //   "Tanlangan til uchun title:",
+  //   record?.expand?.title?.[currentLanguage]
+  // );
+  // console.log("Kelgan description obyekt:", record?.expand?.description);
+  console.log(
+    "Tanlangan til uchun description:",
+    record?.expand?.description?.[currentLanguage]
+  );
 
   return (
     <header className="relative bg-gradient-to-b bg-[#012B3D] text-white px-4 md:px-16 py-10 md:py-30 overflow-hidden">
@@ -61,9 +96,8 @@ export default function Header() {
 
           <p
             className="text-gray-200 text-sm md:text-base"
-          >
-            {parseHTMLString(description)}
-          </p>
+            dangerouslySetInnerHTML={{ __html: parseHTMLString(description) }}
+          ></p>
 
           <div className="flex gap-2 md:gap-4">
             <button className="bg-gray-700 px-4 md:px-6 py-2 rounded-xl hover:bg-teal-400">
@@ -75,7 +109,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* ✅ Agar API dan rasm kelgan bo‘lsa, uni chiqaramiz */}
         <div className="flex-2 relative group w-full md:w-auto">
           {image ? (
             <div className="relative rounded-3xl shadow-lg overflow-hidden bg-[#4CCED0]">

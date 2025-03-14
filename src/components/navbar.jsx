@@ -1,21 +1,24 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import Logo from "../assets/LOGO.png";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import { useLanguage } from "../hooks/useLanguage";
+import { NavbarData } from "../data";
+import { NavbarTranslations } from "../data/translations";
 
 const Navbar = () => {
-  const { t, i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const { changeLanguage: translator, lang } = useLanguage();
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
+  const changeLanguage = (lang) => {
     setDropdownOpen(false);
+    translator(lang);
   };
 
   const closeDropdown = (e) => {
@@ -39,21 +42,16 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-4 lg:gap-8 font-medium bg-[#1B4055] text-white px-4 py-2 lg:px-6 rounded-[30px] mx-auto justify-center">
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/">{t("home")}</Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/about">{t("about")}</Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/services">{t("services")}</Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/contact">{t("contact")}</Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/comments">{t("comments")}</Link>
-          </li>
+          {NavbarData.map((item) => (
+            <li className="hover:text-teal-300 cursor-pointer">
+              <Link
+                to={`/${lang}/${item.text}`}
+                onClick={() => changeLanguage(lang)}
+              >
+                {NavbarTranslations[item.text][lang]}
+              </Link>
+            </li>
+          ))}
         </ul>
 
         {/* Language Selector - ALWAYS VISIBLE */}
@@ -63,7 +61,7 @@ const Navbar = () => {
               onClick={toggleDropdown}
               className="bg-[#1B4055] text-white px-4 py-2 rounded-[30px] flex items-center"
             >
-              🌐 {i18n.language.toUpperCase()}
+              🌐 {lang}
             </button>
             {dropdownOpen && (
               <ul
@@ -72,21 +70,21 @@ const Navbar = () => {
               >
                 <li
                   className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition"
-                  onClick={() => changeLanguage("eng")}
+                  onClick={() => changeLanguage("en")}
                 >
-                  Eng
+                  En
                 </li>
                 <li
                   className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition"
-                  onClick={() => changeLanguage("uzb")}
+                  onClick={() => changeLanguage("uz")}
                 >
-                  Uzb
+                  Uz
                 </li>
                 <li
                   className="px-6 py-2 hover:bg-teal-500 cursor-pointer transition"
-                  onClick={() => changeLanguage("rus")}
+                  onClick={() => changeLanguage("ru")}
                 >
-                  Rus
+                  Ru
                 </li>
               </ul>
             )}
@@ -117,31 +115,16 @@ const Navbar = () => {
 
         {/* Sidebar Links */}
         <ul className="flex flex-col gap-4 px-8 py-4 text-lg">
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/" onClick={() => setSidebarOpen(false)}>
-              {t("home")}
-            </Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/about" onClick={() => setSidebarOpen(false)}>
-              {t("about")}
-            </Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/services" onClick={() => setSidebarOpen(false)}>
-              {t("services")} 
-            </Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/contact" onClick={() => setSidebarOpen(false)}>
-              {t("contact")}
-            </Link>
-          </li>
-          <li className="hover:text-teal-300 cursor-pointer">
-            <Link to="/comments" onClick={() => setSidebarOpen(false)}>
-              {t("comments")}
-            </Link>
-          </li>
+          {NavbarData.map((item) => (
+            <li className="hover:text-teal-300 cursor-pointer">
+              <Link
+                to={`/${lang}/${item.text}`}
+                onClick={() => setSidebarOpen(false)}
+              >
+                {NavbarTranslations[item.text][lang]}
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
     </div>

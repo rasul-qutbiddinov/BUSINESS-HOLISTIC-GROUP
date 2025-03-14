@@ -5,9 +5,12 @@ import ReasonCard from './reason-card'
 import Testimonials from './testimonials'
 import ContactCard from './contact-card'
 import Header from "../components/header"
+import { useParams } from 'react-router-dom'
 
 
 const Home = () => {
+  const {lang} = useParams()
+console.log("lang", lang);
   return (
     <div>
       <Header/>
