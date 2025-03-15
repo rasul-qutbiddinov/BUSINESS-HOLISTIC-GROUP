@@ -4,6 +4,8 @@ import { Facebook, Instagram, Linkedin, Send } from "lucide-react";
 import Logo from "../assets/LOGO.png";
 
 const Footer = () => {
+
+  
   const { t } = useTranslation();
 
   return (
