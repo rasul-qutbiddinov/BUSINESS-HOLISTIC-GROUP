@@ -87,7 +87,7 @@ const ContactCard = () => {
           } p-4 rounded-xl shadow-lg text-white flex items-center gap-2 transition-transform ${
             window.innerWidth < 768
               ? "bottom-10 left-1/2 transform -translate-x-1/2"
-              : "bottom-10 right-10"
+              : "bottom-10 right-15"
           }`}
         >
           {toast.type === "success" ? (
