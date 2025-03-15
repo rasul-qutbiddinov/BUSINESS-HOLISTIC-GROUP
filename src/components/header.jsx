@@ -1,6 +1,6 @@
 import { useLanguage } from "../hooks/useLanguage";
 import useParseHTML from "./hooks";
-import Navbar from "./navbar";
+import Navbar from "../components/navbar";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 
