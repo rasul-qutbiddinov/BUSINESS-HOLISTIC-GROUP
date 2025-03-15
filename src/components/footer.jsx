@@ -67,8 +67,6 @@ const Footer = () => {
             </a>
           </div>
         </div>
-
-        {/* Quyi qism: Kontakt va boshqa ma'lumotlar */}
         <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 md:gap-6 border-t border-white/20 pt-4 md:pt-6 text-center md:text-left">
           {/* Chap tomon: Logo */}
           <div className="flex items-center gap-2 mb-4 md:mb-0">
