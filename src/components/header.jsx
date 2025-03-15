@@ -46,15 +46,7 @@ export default function Header() {
     record?.expand?.description?.[lang] ||
     record?.expand?.description?.uz ||
     "No description available";
-
-  // console.log("Foydalanuvchi tili:", i18n.language);
-  // console.log("API uchun mos til:", currentLanguage);
-  // console.log("Kelgan title obyekt:", record?.expand?.title);
-  // console.log(
-  //   "Tanlangan til uchun title:",
-  //   record?.expand?.title?.[currentLanguage]
-  // );
-  // console.log("Kelgan description obyekt:", record?.expand?.description);
+  
   console.log(
     "Tanlangan til uchun description:",
     record?.expand?.description?.[currentLanguage]
@@ -123,6 +115,7 @@ export default function Header() {
           )}
         </div>
       </section>
+
     </header>
   );
 }
