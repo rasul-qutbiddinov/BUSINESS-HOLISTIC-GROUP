@@ -40,7 +40,6 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Ijtimoiy tarmoqlar ikonkalari */}
           <div className="flex items-center gap-4 sm:gap-6">
             <a
               href="https://www.linkedin.com/in/rasul-qutbiddinov/"
