@@ -13,7 +13,7 @@ const Navbar = () => {
   const { language: lang, setLanguage: changeLanguage } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
-
+ 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
   const toggleSidebar = () => setSidebarOpen((prev) => !prev);
 
