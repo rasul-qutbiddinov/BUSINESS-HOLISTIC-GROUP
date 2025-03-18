@@ -3,11 +3,11 @@ import { Phone, Edit2 } from "lucide-react";
 import Group from "../assets/Group.png";
 import useParseHTML from "../components/hooks";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 
 const AboutCard = () => {
   const { parseHTMLString } = useParseHTML();
-  const { lang } = useParams(); // ✅ URL'dan tilni olish
+  const { lang } = useParams();
 
   const { error, data, isError, isSuccess } = useQuery({
     queryKey: ["about_us"],
@@ -31,9 +31,8 @@ const AboutCard = () => {
   const record = data?.items?.[0];
   const collectionName = record?.collectionId || "about_us";
   const id = record?.id;
-  const images = record?.image || []; // ✅ Rasmlar array shaklida kelgan
+  const images = record?.image || [];
 
-  // 🔥 Til bo‘yicha API'dan kelgan ma'lumotlarni olish
   const aboutTitle =
     record?.expand?.title?.[lang] ||
     record?.expand?.title?.en ||
@@ -57,8 +56,31 @@ const AboutCard = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10 w-full max-w-6xl">
         {/* Text Section */}
-        <div className="flex flex-col justify-center gap-4 max-w-lg w-full mx-auto text-center lg:text-left order-1 lg:order-2">
-          <div className="text-sm font-semibold text-teal-500 uppercase tracking-wide flex items-center justify-center lg:justify-start gap-2">
+        <div className="flex flex-col justify-center gap-4 max-w-lg w-full mx-auto text-center lg:text-left order-1 lg:order-2 relative">
+          {/* Rotating Text */}
+          <div className="relative flex justify-center lg:justify-start">
+            <div className="w-32 h-32 relative">
+              <svg viewBox="0 0 200 200" className="absolute top-0 left-0">
+                <g className="animate-spin-slow">
+                  {" "}
+                  {/* ANIMATSIYA BU YERDA */}
+                  <defs>
+                    <path
+                      id="circlePath"
+                      d="M 100,100 m -75,0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
+                    />
+                  </defs>
+                  <text fill="#0D3B66" fontSize="26" fontWeight="bold">
+                    <textPath href="#circlePath">
+                     TEAM FRIENDLY TEAM FRIENDLY TEAM FRIENDLY TEAM FRIENDLY
+                    </textPath>
+                  </text>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div className="text-sm font-semibold text-teal-500 uppercase tracking-wide flex items-center justify-center lg:justify-start gap-2 mt-8">
             <span className="h-px w-8 bg-teal-500"></span> IN THE WORLD
           </div>
           <h2
@@ -87,10 +109,10 @@ const AboutCard = () => {
           {images.length > 0 ? (
             images.map((image, index) => (
               <div key={index} className="relative group">
-                <div className="absolute w-full h-full bg-transparent transition-all duration-300 ease-in-out group-hover:bg-blue-500 rounded-2xl group-hover:translate-x-3 group-hover:translate-y-3"></div>
+                <div className="absolute w-full h-full bg-transparent transition-all duration-300 ease-in-out  rounded-2xl group-hover:translate-x-3 group-hover:translate-y-3"></div>
                 <img
                   src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${image}`}
-                  className="relative rounded-2xl object-cover shadow-lg w-full max-w-md h-auto border-[4px] border-transparent transition-all duration-300 ease-in-out group-hover:border-blue-500 group-hover:translate-x-3 group-hover:translate-y-3"
+                  className="relative rounded-2xl object-cover shadow-lg w-full max-w-md h-auto border-[4px] border-transparent transition-all duration-300 ease-in-out group-hover:translate-x-3 group-hover:translate-y-3"
                   alt={`About section image ${index + 1}`}
                 />
               </div>

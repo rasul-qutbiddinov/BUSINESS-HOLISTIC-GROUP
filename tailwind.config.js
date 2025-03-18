@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       animation: {
-        "spin-slow": "spin 10s linear infinite", // 10 soniyada bir marta aylanadi
+        "spin-slow": "spin 10s linear infinite",
       },
     },
   },
