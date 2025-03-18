@@ -50,34 +50,33 @@ const ServicesItem = ({ id: propId }) => {
     : "";
 
   return (
-    
-      <div
-        key={cardData.id}
-        className="group p-6 rounded-xl bg-slate-800 relative overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-1"
-      >
-        <div className="flex gap-4 items-center">
-          {cardData.icon && (
-            <img src={iconUrl} alt="Service Icon" className="w-12 h-12" />
-          )}
-          <h3 className="text-xl font-semibold text-white">
-            {parseHTMLString(
-              cardData.expand?.title?.[lang] ||
-                cardData.expand?.title?.uz ||
-                "No title available"
-            )}
-          </h3>
-        </div>
-        <p className="mt-2 text-gray-300 text-sm">
+    <div
+      key={cardData.id}
+      className="group p-6 rounded-xl bg-slate-800 relative overflow-hidden cursor-pointer transition-transform duration-300 hover:-translate-y-1"
+    >
+      <div className="flex gap-4 items-center">
+        {cardData.icon && (
+          <img src={iconUrl} alt="Service Icon" className="w-12 h-12" />
+        )}
+        <h3 className="text-xl font-semibold text-white">
           {parseHTMLString(
-            cardData.expand?.description?.[lang] ||
-              cardData.expand?.description?.uz ||
-              "No description available"
+            cardData.expand?.title?.[lang] ||
+              cardData.expand?.title?.uz ||
+              "No title available"
           )}
-        </p>
-
-        <span className="absolute bottom-0 left-0 h-3 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
-        <span className="absolute bottom-0 right-0 w-3 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
+        </h3>
       </div>
+      <p className="mt-2 text-gray-300 text-sm">
+        {parseHTMLString(
+          cardData.expand?.description?.[lang] ||
+            cardData.expand?.description?.uz ||
+            "No description available"
+        )}
+      </p>
+
+      <span className="absolute bottom-0 left-0 h-3 w-0 bg-teal-400 transition-all duration-300 group-hover:w-full"></span>
+      <span className="absolute bottom-0 right-0 w-3 h-0 bg-teal-400 transition-all duration-300 group-hover:h-full"></span>
+    </div>
   );
 };
 

@@ -76,6 +76,7 @@ const ServicesCard = () => {
           className="text-4xl font-bold mb-4"
           dangerouslySetInnerHTML={{ __html: parseHTMLString(title) }}
         />
+
         <p
           className="text-gray-300 mb-12"
           dangerouslySetInnerHTML={{ __html: parseHTMLString(description) }}

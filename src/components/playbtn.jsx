@@ -20,7 +20,7 @@ export default function PlayButton() {
   return (
     <button className="relative w-30 h-30 flex mr-80 mt-35 justify-center items-center bg-teal-400 rounded-full shadow-lg transition transform hover:scale-110">
       {/* ✅ Oq tashqi chiziq va yozuv */}
-      <svg className="absolute w-34 h-34" viewBox="0 0 200 200">
+      <svg className="absolute w-32 h-32" viewBox="0 0 200 200">
         {/* Oq doira ichkarida bo‘lishi uchun radius kichraytirildi */}
         <circle
           cx="100"
@@ -42,8 +42,9 @@ export default function PlayButton() {
           />
         </defs>
         <text ref={textRef} fill="white" fontSize="16" fontWeight=" Inter">
-          <textPath xlinkHref="#circlePath" startOffset="50%">
-            STUDIO BUSINESS AGENCY • STUDIO BUSINESS AGENCY •
+          <textPath xlinkHref="#circlePath" >
+            STUDIO BUSINESS AGENCY • STUDIO BUSINESS AGENCY • STUDIO BUSINESS
+            AGENCY • STUDIO BUSINESS AGENCY • STUDIO BUSINESS AGENCY • STUDIO
           </textPath>
         </text>
       </svg>

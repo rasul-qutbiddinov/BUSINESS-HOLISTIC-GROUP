@@ -7,15 +7,11 @@ import Partner from "./partner";
 const About = () => {
   return (
     <div className="bg-[#011727] text-white pt-30 py-10 px-4 sm:px-8 md:px-12 lg:px-20">
-
-      
       <AboutHeader />
       <Successe />
       <Corusel />
       <Partner />
 
-
-      
       <section className="py-10 bg-[#011727] flex flex-col items-center justify-center gap-6 max-w-[1200px] mx-auto mb-6 px-4">
         <h2 className="text-2xl md:text-3xl font-bold mb-4 text-white">
           Stay in the know:

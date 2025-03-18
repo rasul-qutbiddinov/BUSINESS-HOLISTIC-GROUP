@@ -4,19 +4,14 @@ import { SwiperSlide } from "swiper/react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useParseHTML from "../components/hooks";
+import  comment  from "../assets/testimonials.png";
 
 const TestimonialsItem = ({ id: propId }) => {
   const { parseHTMLString } = useParseHTML();
   const { id: paramId, lang } = useParams();
   const id = propId || paramId;
 
-  // Fetch testimonial data
-  const {
-    data: cardData,
-    error,
-    isError,
-    isLoading,
-  } = useQuery({
+  const { data: cardData, error, isError, isLoading } = useQuery({
     queryKey: [`comments-card-${id}`],
     queryFn: () =>
       fetch(
@@ -58,22 +53,32 @@ const TestimonialsItem = ({ id: propId }) => {
   const baseUrl = "https://back.holistic.saidoff.uz/api/files/";
   const imageUrl = cardData.image?.length
     ? `${baseUrl}${cardData.collectionId}/${cardData.id}/${cardData.image[0]}`
-    : "https://via.placeholder.com/100"; // Default placeholder
+    : "https://via.placeholder.com/100";
 
   return (
-    <SwiperSlide>
-      <div className="bg-[#0A1722] text-white p-6 md:p-8 rounded-xl shadow-md relative w-full max-w-xs mx-auto transition-all duration-300 hover:scale-105 hover:shadow-lg hover:border-l-8 md:hover:border-l-16 hover:border-teal-400">
-        <Quote className="text-teal-400 mb-2 md:mb-4" size={24} />
-        <p
-          className="mb-4 md:mb-6 text-sm md:text-base"
-          dangerouslySetInnerHTML={{ __html: parseHTMLString(testimonialText) }}
-        />
-        <div className="flex items-center gap-2 md:gap-4">
+    <SwiperSlide className="h-full flex">
+      <div className="relative mt-6 bg-[#0A1722] text-white p-8 rounded-2xl shadow-lg max-w-md w-full h-full flex flex-col justify-between min-h-[450px]">
+        <div>
+          <div className="w-15">
+            <img src={comment} alt="logo" />
+          </div>
+          <p
+            className="mb-6 text-sm md:text-base leading-relaxed"
+            dangerouslySetInnerHTML={{
+              __html: parseHTMLString(testimonialText),
+            }}
+          />
+        </div>
+        <div className="relative flex items-center gap-4 mt-auto">
           <img
             src={imageUrl}
             alt="User"
-            className="w-10 md:w-12 h-10 md:h-12 rounded-full border-2 border-teal-400"
+            className="w-12 h-12 rounded-full border-2 border-teal-400"
           />
+          <div>
+            <h3 className="font-bold">Leslie Alexander</h3>
+            <p className="text-sm text-gray-400">CEO, Company</p>
+          </div>
         </div>
       </div>
     </SwiperSlide>

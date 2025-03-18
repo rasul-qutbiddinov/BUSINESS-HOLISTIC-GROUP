@@ -5,6 +5,9 @@ body {
     overflow-x: hidden;
     max-width: 100%;
 }
+* {
+    user-select: none;
+}
 
 .custom-swiper .swiper-pagination-bullets {
     bottom: -20px;

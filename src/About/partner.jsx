@@ -1,5 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 const Partner = () => {
   const { error, data, isError, isLoading } = useQuery({
@@ -38,10 +40,19 @@ const Partner = () => {
               key={partner.id || index}
               className="bg-[#012B3D] rounded-xl p-4 shadow-lg hover:scale-105 transition-transform"
             >
-              <img
+              {/* <img
                 src={`https://back.holistic.saidoff.uz/api/files/partners/${partner.id}/${partner.image}`}
                 alt={partner.name || `Partner ${index + 1}`}
                 className="mx-auto h-12 md:h-20"
+              /> */}
+              <LazyLoadImage
+                src={`https://back.holistic.saidoff.uz/api/files/partners/${partner.id}/${partner.image}`}
+                alt={partner.name || `Partner ${index + 1}`}
+                className="mx-auto h-12 md:h-20"
+                effect="blur"
+                wrapperProps={{
+                  style: { transitionDelay: "0.5s" },
+                }}
               />
             </div>
           ))

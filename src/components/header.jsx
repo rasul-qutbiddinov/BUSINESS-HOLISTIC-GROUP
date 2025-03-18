@@ -55,7 +55,7 @@ export default function Header() {
       {/* Navbar */}
       <Navbar />
 
-      <section className="relative flex flex-col md:flex-row items-center justify-between mt-12 md:mt-24 gap-6 md:gap-10 z-10">
+      <section className="relative flex flex-col md:flex-row items-center justify-between mt-12 md:mt-10 gap-6 md:gap-10 z-10">
         <div className="flex-1 space-y-4 md:space-y-6">
           <h1
             className="text-3xl md:text-6xl font-bold leading-tight"

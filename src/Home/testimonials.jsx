@@ -10,6 +10,9 @@ import { useParams } from "react-router-dom";
 import TestimonialsItem from "../components/testimonials_item";
 import "../index.css";
 
+// Rasmni import qilish
+import commentsBackground from "../assets/comments-c-back.png";
+
 const TestimonialsCard = () => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
@@ -36,7 +39,7 @@ const TestimonialsCard = () => {
       swiperInstance.navigation.init();
       swiperInstance.navigation.update();
     }
-  }, [data]); // Data yuklanganidan keyin ishga tushadi
+  }, [data]);
 
   if (isError) {
     return <p className="text-white text-center">Xatolik yuz berdi...</p>;
@@ -54,7 +57,12 @@ const TestimonialsCard = () => {
   const commentIds = data?.comments || [];
 
   return (
-    <section className="bg-[#012B3D] py-16 relative">
+    <section
+      className="py-16 relative bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: `url(${commentsBackground})`,
+      }}
+    >
       <div className="container mx-auto px-4 text-center">
         <h2
           className="text-4xl font-bold text-white mb-4"
@@ -78,16 +86,20 @@ const TestimonialsCard = () => {
               prevEl: prevRef.current,
               nextEl: nextRef.current,
             }}
-            pagination={{ clickable: true }}
             breakpoints={{
-              1024: { slidesPerView: 3, spaceBetween: 30 },
+              768: { slidesPerView: 2 },  
+              1024: { slidesPerView: 3 },
             }}
             modules={[Pagination, Autoplay, Navigation]}
+
+            
             className="relative max-w-6xl mx-auto"
           >
             {commentIds.map((commentId) => (
-              <SwiperSlide key={commentId}>
-                <TestimonialsItem id={commentId} />
+              <SwiperSlide key={commentId} className="h-auto flex">
+                <div className="w-full h-full flex">
+                  <TestimonialsItem id={commentId} />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -100,13 +112,13 @@ const TestimonialsCard = () => {
         <div className="flex justify-center gap-6 mt-6">
           <button
             ref={prevRef}
-            className="text-white bg-gray-800 rounded-full p-3 shadow-lg transition"
+            className="text-white bg-gray-800 rounded-full w-15 h-15 shadow-lg transition"
           >
             ❮
           </button>
           <button
             ref={nextRef}
-            className="text-white bg-gray-800 rounded-full p-3 shadow-lg transition"
+            className="text-white bg-gray-800 rounded-full w-15 h-15 shadow-lg transition"
           >
             ❯
           </button>
