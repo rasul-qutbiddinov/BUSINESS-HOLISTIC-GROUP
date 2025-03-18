@@ -1,5 +1,6 @@
 import { FaPlay } from "react-icons/fa";
 import { useEffect, useRef } from "react";
+import play from "../assets/Vector.png";
 
 export default function PlayButton() {
   const textRef = useRef(null);
@@ -17,9 +18,9 @@ export default function PlayButton() {
   }, []);
 
   return (
-    <button className="relative w-40 h-40 flex mr-80 mt-30 justify-center items-center bg-teal-400 rounded-full shadow-lg transition transform hover:scale-110">
+    <button className="relative w-30 h-30 flex mr-80 mt-35 justify-center items-center bg-teal-400 rounded-full shadow-lg transition transform hover:scale-110">
       {/* ✅ Oq tashqi chiziq va yozuv */}
-      <svg className="absolute w-44 h-44" viewBox="0 0 200 200">
+      <svg className="absolute w-34 h-34" viewBox="0 0 200 200">
         {/* Oq doira ichkarida bo‘lishi uchun radius kichraytirildi */}
         <circle
           cx="100"
@@ -46,11 +47,7 @@ export default function PlayButton() {
           </textPath>
         </text>
       </svg>
-
-      {/* ✅ Markazdagi Play tugmasi */}
-      <div className="w-16 h-16 flex justify-center items-center bg-white rounded-full shadow-lg">
-        <FaPlay className="text-[#32D3CB] text-3xl" />
-      </div>
+      <img src={play} alt="play logo" />
     </button>
   );
 }

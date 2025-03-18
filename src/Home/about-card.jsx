@@ -17,8 +17,6 @@ const AboutCard = () => {
       ).then((res) => res.json()),
   });
 
-  console.log("About data", data);
-
   if (isError) {
     console.error("Error fetching data:", error);
     return <p className="text-white text-center">Xatolik yuz berdi...</p>;
@@ -54,25 +52,45 @@ const AboutCard = () => {
         }}
       ></div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10 w-full max-w-6xl">
-        {/* Text Section */}
-        <div className="flex flex-col justify-center gap-4 max-w-lg w-full mx-auto text-center lg:text-left order-1 lg:order-2 relative">
+      <div className="grid grid-flow-col grid-rows-3 gap-6 relative  z-10 w-full max-w-6xl">
+        {/* Image 1 - bottom left */}
+        <div className="row-span-2 row-end-3 hidden sm:inline-block relative">
+          {images[0] && (
+            <img
+              src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${images[0]}`}
+              className="rounded-2xl shadow-lg object-cover  w-full max-w-md h-100 border-4 border-transparent transition-all duration-300 ease-in-out hover:scale-105"
+              alt="Team Image 1"
+            />
+          )}
+        </div>
+
+        {/* Image 2 - top right */}
+        <div className="row-span-2  row-start-2 hidden sm:inline-block relative">
+          {images[1] && (
+            <img
+              src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${images[1]}`}
+              className="rounded-2xl shadow-lg object-cover w-full max-w-md h-100 border-4 border-transparent transition-all duration-300 ease-in-out hover:scale-105"
+              alt="Team Image 2"
+            />
+          )}
+        </div>
+
+        {/* Text Section - right side */}
+        <div className="row-start-1 row-end-4 flex flex-col justify-center text-left ">
           {/* Rotating Text */}
-          <div className="relative flex justify-center lg:justify-start">
+          <div className="relative flex justify-center lg:justify-start mb-6">
             <div className="w-32 h-32 relative">
               <svg viewBox="0 0 200 200" className="absolute top-0 left-0">
                 <g className="animate-spin-slow">
-                  {" "}
-                  {/* ANIMATSIYA BU YERDA */}
                   <defs>
                     <path
                       id="circlePath"
                       d="M 100,100 m -75,0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
                     />
                   </defs>
-                  <text fill="#0D3B66" fontSize="26" fontWeight="bold">
+                  <text fill="#0D3B66" fontSize="30" fontWeight="bold">
                     <textPath href="#circlePath">
-                     TEAM FRIENDLY TEAM FRIENDLY TEAM FRIENDLY TEAM FRIENDLY
+                      FRIENDLY TEAM FRIENDLY TEAM FRIENDLY TEAM FRIENDLY TEAM
                     </textPath>
                   </text>
                 </g>
@@ -80,7 +98,8 @@ const AboutCard = () => {
             </div>
           </div>
 
-          <div className="text-sm font-semibold text-teal-500 uppercase tracking-wide flex items-center justify-center lg:justify-start gap-2 mt-8">
+          {/* Title and Description */}
+          <div className="text-sm font-semibold text-teal-500 uppercase tracking-wide flex items-center gap-2">
             <span className="h-px w-8 bg-teal-500"></span> IN THE WORLD
           </div>
           <h2
@@ -88,38 +107,21 @@ const AboutCard = () => {
             dangerouslySetInnerHTML={{ __html: parseHTMLString(aboutTitle) }}
           ></h2>
           <p
-            className="text-gray-600 text-sm md:text-base"
+            className="text-gray-600 text-sm md:text-base mt-4"
             dangerouslySetInnerHTML={{
               __html: parseHTMLString(aboutDescription),
             }}
           ></p>
 
-          <div className="mt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button className="bg-gray-200 active:bg-teal-500 text-teal-400 px-6 py-2 rounded-lg hover:bg-teal-400 hover:text-white flex items-center gap-2 transition w-full sm:w-auto">
+          {/* Buttons */}
+          <div className="mt-6 flex flex-col sm:flex-row gap-4">
+            <button className="bg-teal-500 text-white px-6 py-2 rounded-lg hover:bg-teal-600 flex items-center gap-2 transition w-full sm:w-auto">
               <Edit2 size={16} /> Fill in brief
             </button>
-            <button className="bg-gray-200 active:bg-teal-500 px-6 py-2 rounded-xl text-teal-400 font-medium hover:bg-teal-400 hover:text-white flex items-center gap-2 transition w-full sm:w-auto">
+            <button className="bg-gray-200 text-teal-600 px-6 py-2 rounded-lg hover:bg-teal-500 hover:text-white flex items-center gap-2 transition w-full sm:w-auto">
               <Phone size={16} /> Call
             </button>
           </div>
-        </div>
-
-        {/* Images Section */}
-        <div className="flex flex-col items-center gap-6 relative z-20 order-2 lg:order-1">
-          {images.length > 0 ? (
-            images.map((image, index) => (
-              <div key={index} className="relative group">
-                <div className="absolute w-full h-full bg-transparent transition-all duration-300 ease-in-out  rounded-2xl group-hover:translate-x-3 group-hover:translate-y-3"></div>
-                <img
-                  src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${image}`}
-                  className="relative rounded-2xl object-cover shadow-lg w-full max-w-md h-auto border-[4px] border-transparent transition-all duration-300 ease-in-out group-hover:translate-x-3 group-hover:translate-y-3"
-                  alt={`About section image ${index + 1}`}
-                />
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-600">Rasmlar mavjud emas</p>
-          )}
         </div>
       </div>
     </section>
