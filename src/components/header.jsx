@@ -6,14 +6,15 @@ import SocialMediaScroll from "../components/socialmedia";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import headerback from "../assets/header_back.png";
-import PlayButton from "../components/playbtn"; // 🆕 PlayButton import qilindi
+import PlayButton from "../components/playbtn";
+import HeaderLoader from "../Loaders/HeaderL"; // ✅ Loader import qildik
 
 export default function Header() {
   const { parseHTMLString } = useParseHTML();
   const { i18n } = useTranslation();
   const { lang } = useLanguage();
 
-  const { error, data, isError, isSuccess } = useQuery({
+  const { error, data, isError, isLoading } = useQuery({
     queryKey: ["hero"],
     queryFn: () =>
       fetch(
@@ -21,8 +22,12 @@ export default function Header() {
       ).then((res) => res.json()),
   });
 
-  if (!isSuccess) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+  if (isLoading) {
+    return <HeaderLoader />; // ✅ Loading bo‘lsa, HeaderLoader ko‘rinadi
+  }
+
+  if (isError) {
+    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
   }
 
   const record = data?.items?.[0];
@@ -78,7 +83,7 @@ export default function Header() {
         </div>
 
         {/* Rasm va "Play" tugmasi */}
-        <div className="flex-2 relative w-full md:w-auto group ">
+        <div className="flex-2 relative w-full md:w-auto group">
           {image ? (
             <div className="relative rounded-3xl shadow-lg overflow-hidden bg-[#4CCED0]">
               {/* ✅ Rasm */}
@@ -99,7 +104,7 @@ export default function Header() {
         </div>
       </section>
 
-      {/* 🆕 Social media scroll section qo‘shildi */}
+      {/* Social media scroll */}
       <SocialMediaScroll />
     </header>
   );

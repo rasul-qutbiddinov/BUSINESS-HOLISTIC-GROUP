@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useParseHTML from "../components/hooks";
-
+import ReasonsCardLoader from "../Loaders/ReasonICardL";
 const ReasonsItem = ({ id }) => {
   const { parseHTMLString } = useParseHTML();
   const { lang } = useParams(); // Get language from URL
@@ -34,7 +34,7 @@ const ReasonsItem = ({ id }) => {
 
   // Handle loading state
   if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+    return <ReasonsCardLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
   }
 
   // Ensure record exists

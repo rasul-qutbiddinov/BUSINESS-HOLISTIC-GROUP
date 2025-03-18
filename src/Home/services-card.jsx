@@ -3,6 +3,7 @@ import SevicesItem from "../components/services_item";
 import useParseHTML from "../components/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import ServicesCardLoader from "../Loaders/ServicesSectionL"; // ✅ Loader import qildik
 
 const ServicesCard = () => {
   const { parseHTMLString } = useParseHTML();
@@ -25,10 +26,8 @@ const ServicesCard = () => {
 
   // Handle loading state
   if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+    return <ServicesCardLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
   }
-
-  // console.log("services DATAA", data);
 
   // Fix record access
   const record = data; // Directly use data instead of accessing `items[0]`
@@ -43,7 +42,6 @@ const ServicesCard = () => {
     record?.expand?.description?.[lang] ||
     record?.expand?.description?.uz ||
     "No description available";
-  // console.log("Services data", data);
 
   return (
     <section className="px-8 py-16 bg-gradient-to-b bg-[#012B3D] text-white relative overflow-hidden">

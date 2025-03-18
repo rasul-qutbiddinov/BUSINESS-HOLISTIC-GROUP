@@ -4,12 +4,13 @@ import Group from "../assets/Group.png";
 import useParseHTML from "../components/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import AboutCardLoader from "../Loaders/AboutSectionL"; // ✅ Loader import qildik
 
 const AboutCard = () => {
   const { parseHTMLString } = useParseHTML();
   const { lang } = useParams();
 
-  const { error, data, isError, isSuccess } = useQuery({
+  const { error, data, isError, isLoading } = useQuery({
     queryKey: ["about_us"],
     queryFn: () =>
       fetch(
@@ -17,13 +18,13 @@ const AboutCard = () => {
       ).then((res) => res.json()),
   });
 
+  if (isLoading) {
+    return <AboutCardLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
+  }
+
   if (isError) {
     console.error("Error fetching data:", error);
     return <p className="text-white text-center">Xatolik yuz berdi...</p>;
-  }
-
-  if (!isSuccess) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
   }
 
   const record = data?.items?.[0];
@@ -65,7 +66,7 @@ const AboutCard = () => {
         </div>
 
         {/* Image 2 - top right */}
-        <div className="row-span-2  row-start-2 hidden sm:inline-block relative">
+        <div className="row-span-2 row-start-2 hidden sm:inline-block relative">
           {images[1] && (
             <img
               src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${images[1]}`}

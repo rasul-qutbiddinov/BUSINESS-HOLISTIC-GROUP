@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../assets/LOGO.png";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import AboutIntroLoader from "../Loaders/AboutIntroLoader";
+import AboutIntroLoader from "../Loaders/AboutIntroL";
 
 const AboutHeader = () => {
   const { lang } = useParams();

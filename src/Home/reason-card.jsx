@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import ReasonsItem from "../components/reasons_item"; // Import the card component
 import useParseHTML from "../components/hooks";
+import ReasonsLoader from "../Loaders/ReasonSectionL"; // ✅ Loader import qildik
 
 const Reasons = () => {
   const { parseHTMLString } = useParseHTML();
@@ -27,7 +28,7 @@ const Reasons = () => {
 
   // Handle loading state
   if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+    return <ReasonsLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
   }
 
   // Ensure we have data
@@ -58,10 +59,10 @@ const Reasons = () => {
             <div
               key={serviceId}
               className={`
-          ${index === 0   || index === 1 ? "col-span-1" : ""} 
-          ${index === 2 ? "md:col-span-2 row-start-2" : ""} 
-          ${index === 3 ? "md:col-span-1 md:row-span-2" : ""}
-        `}
+                ${index === 0 || index === 1 ? "col-span-1" : ""} 
+                ${index === 2 ? "md:col-span-2 row-start-2" : ""} 
+                ${index === 3 ? "md:col-span-1 md:row-span-2" : ""}
+              `}
             >
               <ReasonsItem id={serviceId} />
             </div>

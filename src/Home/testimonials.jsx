@@ -8,9 +8,7 @@ import useParseHTML from "../components/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import TestimonialsItem from "../components/testimonials_item";
-import "../index.css";
-
-// Rasmni import qilish
+import TestimonialsCardLoader from "../Loaders/CommentsSectionL"; // ✅ Loader import qildik
 import commentsBackground from "../assets/comments-c-back.png";
 
 const TestimonialsCard = () => {
@@ -41,12 +39,12 @@ const TestimonialsCard = () => {
     }
   }, [data]);
 
-  if (isError) {
-    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
+  if (isLoading) {
+    return <TestimonialsCardLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
   }
 
-  if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+  if (isError) {
+    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
   }
 
   const title =
@@ -87,12 +85,10 @@ const TestimonialsCard = () => {
               nextEl: nextRef.current,
             }}
             breakpoints={{
-              768: { slidesPerView: 2 },  
+              768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
             modules={[Pagination, Autoplay, Navigation]}
-
-            
             className="relative max-w-6xl mx-auto"
           >
             {commentIds.map((commentId) => (
@@ -112,13 +108,13 @@ const TestimonialsCard = () => {
         <div className="flex justify-center gap-6 mt-6">
           <button
             ref={prevRef}
-            className="text-white bg-gray-800 rounded-full w-15 h-15 shadow-lg transition"
+            className="text-white bg-gray-800 rounded-full w-10 h-10 shadow-lg transition"
           >
             ❮
           </button>
           <button
             ref={nextRef}
-            className="text-white bg-gray-800 rounded-full w-15 h-15 shadow-lg transition"
+            className="text-white bg-gray-800 rounded-full w-10 h-10 shadow-lg transition"
           >
             ❯
           </button>

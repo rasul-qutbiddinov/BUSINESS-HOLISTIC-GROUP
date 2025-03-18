@@ -1,17 +1,22 @@
 import React from "react";
-import { Quote } from "lucide-react";
 import { SwiperSlide } from "swiper/react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useParseHTML from "../components/hooks";
-import  comment  from "../assets/testimonials.png";
+import comment from "../assets/testimonials.png";
+import TestimonialsItemLoader from "../Loaders/CommentsSectionItimL"; // ✅ Loader import qildik
 
 const TestimonialsItem = ({ id: propId }) => {
   const { parseHTMLString } = useParseHTML();
   const { id: paramId, lang } = useParams();
   const id = propId || paramId;
 
-  const { data: cardData, error, isError, isLoading } = useQuery({
+  const {
+    data: cardData,
+    error,
+    isError,
+    isLoading,
+  } = useQuery({
     queryKey: [`comments-card-${id}`],
     queryFn: () =>
       fetch(
@@ -32,7 +37,7 @@ const TestimonialsItem = ({ id: propId }) => {
   if (isLoading) {
     return (
       <SwiperSlide>
-        <p className="text-white text-center">Yuklanmoqda...</p>
+        <TestimonialsItemLoader /> {/* ✅ TO‘G‘RI LOADER */}
       </SwiperSlide>
     );
   }

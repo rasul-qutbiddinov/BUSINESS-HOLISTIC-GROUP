@@ -2,6 +2,7 @@ import React from "react";
 import useParseHTML from "../components/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import ServicesItemLoader from "../Loaders/ServicesSectionItemL"; // ✅ Loader import qildik
 
 const ServicesItem = ({ id: propId }) => {
   const { parseHTMLString } = useParseHTML();
@@ -35,7 +36,7 @@ const ServicesItem = ({ id: propId }) => {
 
   // Handle loading state
   if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+    return <ServicesItemLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
   }
 
   // Ensure record exists
