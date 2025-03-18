@@ -1,8 +1,12 @@
+/* eslint-disable no-unused-vars */
 import { useLanguage } from "../hooks/useLanguage";
 import useParseHTML from "./hooks";
 import Navbar from "../components/navbar";
+import SocialMediaScroll from "../components/socialmedia";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
+import headerback from "../assets/header_back.png";
+import PlayButton from "../components/playbtn"; // 🆕 PlayButton import qilindi
 
 export default function Header() {
   const { parseHTMLString } = useParseHTML();
@@ -16,10 +20,6 @@ export default function Header() {
         "https://back.holistic.saidoff.uz/api/collections/home_page/records?expand=title,description"
       ).then((res) => res.json()),
   });
-
-  console.log("Home data", data);
-  console.log("success", isSuccess);
-  if (isError) console.log("Error", error);
 
   if (!isSuccess) {
     return <p className="text-white text-center">Yuklanmoqda...</p>;
@@ -46,37 +46,13 @@ export default function Header() {
     record?.expand?.description?.[lang] ||
     record?.expand?.description?.uz ||
     "No description available";
-  
-  console.log(
-    "Tanlangan til uchun description:",
-    record?.expand?.description?.[currentLanguage]
-  );
 
   return (
-    <header className="relative bg-gradient-to-b bg-[#012B3D] text-white px-4 md:px-16 py-10 md:py-30 overflow-hidden">
-      <div className="absolute inset-0">
-        <svg className="absolute inset-0 w-full h-full opacity-15">
-          <defs>
-            <pattern
-              id="grid"
-              width="10"
-              height="100"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 40 0 L 0 0 0 0"
-                fill="none"
-                stroke="#00578A"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-        <div className="absolute -top-40 -right-40 w-[438px] h-[429px] bg-[#00578A] opacity-40 rounded-full blur-[148px]"></div>
-        <div className="absolute -bottom-40 -left-40 w-[438px] h-[429px] bg-[#00578A] opacity-30 rounded-full blur-[148px]"></div>
-      </div>
-
+    <header
+      className="relative bg-gradient-to-b from-[#012B3D] to-[#012B3D] text-white px-4 md:px-16 py-10 md:py-30 overflow-hidden bg-cover bg-center"
+      style={{ backgroundImage: `url(${headerback})` }}
+    >
+      {/* Navbar */}
       <Navbar />
 
       <section className="relative flex flex-col md:flex-row items-center justify-between mt-12 md:mt-24 gap-6 md:gap-10 z-10">
@@ -101,14 +77,21 @@ export default function Header() {
           </div>
         </div>
 
-        <div className="flex-2 relative group w-full md:w-auto">
+        {/* Rasm va "Play" tugmasi */}
+        <div className="flex-2 relative w-full md:w-auto group ">
           {image ? (
             <div className="relative rounded-3xl shadow-lg overflow-hidden bg-[#4CCED0]">
+              {/* ✅ Rasm */}
               <img
                 src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${image}`}
-                className="object-cover w-full h-full transition-transform duration-300 group-hover:translate-x-[-20px] group-hover:translate-y-[-20px]"
+                className="object-cover w-full h-full"
                 alt="Team Working"
               />
+
+              {/* ✅ PlayButton komponenti */}
+              <div className="absolute inset-0 items-center hidden sm:inline-block justify-center ml-25 mt-15">
+                <PlayButton />
+              </div>
             </div>
           ) : (
             <p className="text-gray-300">Loading image...</p>
@@ -116,6 +99,8 @@ export default function Header() {
         </div>
       </section>
 
+      {/* 🆕 Social media scroll section qo‘shildi */}
+      <SocialMediaScroll />
     </header>
   );
 }
