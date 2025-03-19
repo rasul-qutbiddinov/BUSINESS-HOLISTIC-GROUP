@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import "../index.css";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import CoruselLoader from "../Loaders/AboutCaruselL"; // ✅ Loader import qildik
 
 const Corusel = () => {
   const progressRef = useRef(null);
@@ -34,7 +35,7 @@ const Corusel = () => {
   });
 
   if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+    return <CoruselLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
   }
 
   if (isError) {

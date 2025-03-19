@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import SuccesseLoader from "../Loaders/AboutSuccesL"; // ✅ Loader import qildik
 
 const Successe = () => {
   const { lang } = useParams();
@@ -14,7 +15,7 @@ const Successe = () => {
   });
 
   if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+    return <SuccesseLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
   }
 
   if (isError) {

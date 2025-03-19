@@ -8,8 +8,7 @@ import useParseHTML from "../components/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import TestimonialsItem from "../components/testimonials_item";
-import TestimonialsCardLoader from "../Loaders/CommentsSectionL"; // ✅ Loader import qildik
-import commentsBackground from "../assets/comments-c-back.png";
+import TestimonialsCardLoader from "../Loaders/CommentsSectionL";
 
 const TestimonialsCard = () => {
   const prevRef = useRef(null);
@@ -40,7 +39,7 @@ const TestimonialsCard = () => {
   }, [data]);
 
   if (isLoading) {
-    return <TestimonialsCardLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
+    return <TestimonialsCardLoader />;
   }
 
   if (isError) {
@@ -55,18 +54,15 @@ const TestimonialsCard = () => {
   const commentIds = data?.comments || [];
 
   return (
-    <section
-      className="py-16 relative bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `url(${commentsBackground})`,
-      }}
-    >
+    <section className="py-16 relative bg-[#012B3D] bg-cover bg-center bg-no-repeat">
       <div className="container mx-auto px-4 text-center">
         <h2
           className="text-4xl font-bold text-white mb-4"
           dangerouslySetInnerHTML={{ __html: parseHTMLString(title) }}
         />
-        <p className="text-teal-400 uppercase tracking-wide text-sm mb-6">
+
+        {/* TESTIMONIALS matnining orqasiga rasm qo‘shish */}
+        <p className="text-teal-400 uppercase tracking-wide text-sm mb-6 bg-no-repeat bg-center bg-contain bg-[url('/COMMENTS.png')] p-6">
           TESTIMONIALS
         </p>
 

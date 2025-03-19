@@ -1,20 +1,19 @@
 /* eslint-disable no-unused-vars */
 import { useLanguage } from "../hooks/useLanguage";
-import useParseHTML from "./hooks";
+import useParseHTML from "./hooks"; // ✅ To‘g‘ri import
 import Navbar from "../components/navbar";
 import SocialMediaScroll from "../components/socialmedia";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import headerback from "../assets/header_back.png";
-import PlayButton from "../components/playbtn";
-import HeaderLoader from "../Loaders/HeaderL"; // ✅ Loader import qildik
+import PlayButton from "../components/playbtn"; // ✅ PlayButton to‘g‘ri import qilindi
 
 export default function Header() {
   const { parseHTMLString } = useParseHTML();
   const { i18n } = useTranslation();
   const { lang } = useLanguage();
 
-  const { error, data, isError, isLoading } = useQuery({
+  const { error, data, isError, isSuccess } = useQuery({
     queryKey: ["hero"],
     queryFn: () =>
       fetch(
@@ -22,18 +21,14 @@ export default function Header() {
       ).then((res) => res.json()),
   });
 
-  if (isLoading) {
-    return <HeaderLoader />; // ✅ Loading bo‘lsa, HeaderLoader ko‘rinadi
+  if (!isSuccess) {
+    return <p className="text-white text-center">Yuklanmoqda...</p>;
   }
 
-  if (isError) {
-    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
-  }
-
-  const record = data?.items?.[0];
+  const record = data?.items?.[0] || {}; // ✅ Xato oldini olish uchun
   const collectionName = record?.collectionId || "home_page";
-  const id = record?.id;
-  const image = record?.image;
+  const id = record?.id || "";
+  const image = record?.image || "";
 
   const languageMap = {
     uz: "uz",
@@ -55,7 +50,7 @@ export default function Header() {
   return (
     <header
       className="relative bg-gradient-to-b from-[#012B3D] to-[#012B3D] text-white px-4 md:px-16 py-10 md:py-30 overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: `url(${headerback})` }}
+      style={{ backgroundImage: `url(${headerback})` }} // ✅ To‘g‘ri format
     >
       {/* Navbar */}
       <Navbar />
@@ -88,13 +83,13 @@ export default function Header() {
             <div className="relative rounded-3xl shadow-lg overflow-hidden bg-[#4CCED0]">
               {/* ✅ Rasm */}
               <img
-                src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${image}`}
+                src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${image}`} // ✅ To‘g‘ri format
                 className="object-cover w-full h-full"
                 alt="Team Working"
               />
 
               {/* ✅ PlayButton komponenti */}
-              <div className="absolute inset-0 items-center hidden sm:inline-block justify-center ml-25 mt-15">
+              <div className="absolute inset-0 flex items-center justify-center">
                 <PlayButton />
               </div>
             </div>
@@ -104,7 +99,7 @@ export default function Header() {
         </div>
       </section>
 
-      {/* Social media scroll */}
+      {/* 🆕 Social media scroll section qo‘shildi */}
       <SocialMediaScroll />
     </header>
   );
