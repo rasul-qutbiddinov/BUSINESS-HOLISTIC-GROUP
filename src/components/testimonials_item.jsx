@@ -65,7 +65,7 @@ const TestimonialsItem = ({ id: propId }) => {
       <div className="relative mt-6 bg-[#0A1722] text-white p-8 rounded-2xl shadow-lg max-w-md w-full h-full flex flex-col justify-between min-h-[450px]">
         <div>
           <div className="w-15">
-            <img src={comment} alt="logo" />
+            <img src={comment} alt="logo" loading="lazy" />
           </div>
           <p
             className="mb-6 text-sm md:text-base leading-relaxed"
@@ -79,6 +79,7 @@ const TestimonialsItem = ({ id: propId }) => {
             src={imageUrl}
             alt="User"
             className="w-12 h-12 rounded-full border-2 border-teal-400"
+            loading="lazy"
           />
           <div>
             <h3 className="font-bold">Leslie Alexander</h3>

@@ -5,6 +5,7 @@ import useParseHTML from "../components/hooks";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import AboutCardLoader from "../Loaders/AboutSectionL"; // ✅ Loader import qildik
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AboutCard = () => {
   const { parseHTMLString } = useParseHTML();
@@ -27,9 +28,9 @@ const AboutCard = () => {
     return <p className="text-white text-center">Xatolik yuz berdi...</p>;
   }
 
-  const record = data?.items?.[0];
+  const record = data?.items?.[0] || {};
   const collectionName = record?.collectionId || "about_us";
-  const id = record?.id;
+  const id = record?.id || "";
   const images = record?.image || [];
 
   const aboutTitle =
@@ -53,31 +54,39 @@ const AboutCard = () => {
         }}
       ></div>
 
-      <div className="grid grid-flow-col grid-rows-3 gap-6 relative  z-10 w-full max-w-6xl">
+      <div className="grid grid-flow-col grid-rows-3 gap-6 relative z-10 w-full max-w-6xl">
         {/* Image 1 - bottom left */}
-        <div className="row-span-2 row-end-3 hidden sm:inline-block relative">
-          {images[0] && (
-            <img
+        {images[0] && (
+          <div className="row-span-2 row-end-3 hidden sm:inline-block relative">
+            <LazyLoadImage
               src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${images[0]}`}
-              className="rounded-2xl shadow-lg object-cover  w-full max-w-md h-100 border-4 border-transparent transition-all duration-300 ease-in-out hover:scale-105"
+              className="rounded-2xl shadow-lg object-cover w-full max-w-md h-100 border-4 border-transparent transition-all duration-300 ease-in-out hover:scale-105"
               alt="Team Image 1"
+              effect="blur"
+              wrapperProps={{
+                style: { transitionDelay: "0.5s" },
+              }}
             />
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Image 2 - top right */}
-        <div className="row-span-2 row-start-2 hidden sm:inline-block relative">
-          {images[1] && (
-            <img
+        {images[1] && (
+          <div className="row-span-2 row-start-2 hidden sm:inline-block relative">
+            <LazyLoadImage
               src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${images[1]}`}
               className="rounded-2xl shadow-lg object-cover w-full max-w-md h-100 border-4 border-transparent transition-all duration-300 ease-in-out hover:scale-105"
               alt="Team Image 2"
+              effect="blur"
+              wrapperProps={{
+                style: { transitionDelay: "0.5s" },
+              }}
             />
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Text Section - right side */}
-        <div className="row-start-1 row-end-4 flex flex-col justify-center text-left ">
+        <div className="row-start-1 row-end-4 flex flex-col justify-center text-left">
           {/* Rotating Text */}
           <div className="relative flex justify-center lg:justify-start mb-6">
             <div className="w-32 h-32 relative">

@@ -7,6 +7,7 @@ import "../index.css";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import CoruselLoader from "../Loaders/AboutCaruselL"; // ✅ Loader import qildik
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Corusel = () => {
   const progressRef = useRef(null);
@@ -89,11 +90,16 @@ const Corusel = () => {
         {images.length > 0 ? (
           images.map((image, index) => (
             <SwiperSlide key={index}>
-              <img
+              <LazyLoadImage
                 src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${image}`}
                 alt={`Slide ${index + 1}`}
+                effect="blur"
+                wrapperProps={{
+                  style: { transitionDelay: "0.5s" },
+                }}
                 className="rounded-xl shadow-lg object-cover h-[300px] md:h-[400px] w-full transition-transform duration-300 hover:scale-105"
               />
+            
             </SwiperSlide>
           ))
         ) : (

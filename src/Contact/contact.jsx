@@ -157,9 +157,11 @@ const Contact = () => {
           <div className="w-full overflow-hidden">
             <LoadScriptNext
               googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+              loading="lazy"
             >
               <GoogleMap
                 mapContainerStyle={containerStyle}
+                loading="lazy"
                 center={center}
                 zoom={15}
                 options={options}

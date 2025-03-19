@@ -62,7 +62,12 @@ const ReasonsItem = ({ id }) => {
   return (
     <div className="group rounded-2xl p-8 shadow-md transition duration-300 flex flex-col justify-start bg-gray-100 relative overflow-hidden cursor-pointer hover:-translate-y-1">
       {iconUrl && (
-        <img src={iconUrl} alt="Service Icon" className="w-12 h-12 mb-4" />
+        <img
+          src={iconUrl}
+          alt="Service Icon"
+          className="w-12 h-12 mb-4"
+          loading="lazy"
+        />
       )}
       <h3
         className="text-xl font-semibold mb-3 text-gray-800"

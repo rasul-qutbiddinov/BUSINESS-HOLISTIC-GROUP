@@ -57,7 +57,12 @@ const ServicesItem = ({ id: propId }) => {
     >
       <div className="flex gap-4 items-center">
         {cardData.icon && (
-          <img src={iconUrl} alt="Service Icon" className="w-12 h-12" />
+          <img
+            src={iconUrl}
+            alt="Service Icon"
+            className="w-12 h-12"
+            loading="lazy"
+          />
         )}
         <h3 className="text-xl font-semibold text-white">
           {parseHTMLString(

@@ -44,6 +44,7 @@ const AboutHeader = () => {
               src={Logo}
               alt="Company Logo"
               className="h-[120px] md:h-[150px] mx-auto mb-4"
+              loading="lazy"
             />
           </div>
           <div className="max-w-[1200px] mx-auto text-left mb-20 px-4 ">

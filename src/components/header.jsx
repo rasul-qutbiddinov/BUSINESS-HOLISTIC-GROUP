@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslation } from "react-i18next";
 import headerback from "../assets/header_back.png";
 import PlayButton from "../components/playbtn"; // ✅ PlayButton to‘g‘ri import qilindi
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 export default function Header() {
   const { parseHTMLString } = useParseHTML();
@@ -77,19 +78,22 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Rasm va "Play" tugmasi */}
+        {/* ✅ Rasm va "Play" tugmasi to‘g‘ri yozildi */}
         <div className="flex-2 relative w-full md:w-auto group">
           {image ? (
             <div className="relative rounded-3xl shadow-lg overflow-hidden bg-[#4CCED0]">
-              {/* ✅ Rasm */}
-              <img
+              <LazyLoadImage
                 src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${image}`} // ✅ To‘g‘ri format
                 className="object-cover w-full h-full"
                 alt="Team Working"
+                effect="blur"
+                wrapperProps={{
+                  style: { transitionDelay: "0.5s" },
+                }}
               />
 
               {/* ✅ PlayButton komponenti */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              <div className="absolute inset-0 items-center justify-center mt-20 ml-20">
                 <PlayButton />
               </div>
             </div>
