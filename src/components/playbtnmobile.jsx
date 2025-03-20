@@ -2,7 +2,7 @@ import { FaPlay } from "react-icons/fa";
 import { useEffect, useRef } from "react";
 import play from "../assets/Vector.png";
 
-export default function PlayButton() {
+export default function MobilePlayButton() {
   const textRef = useRef(null);
 
   useEffect(() => {
@@ -18,22 +18,17 @@ export default function PlayButton() {
   }, []);
 
   return (
-   <button
-  className="relative justify-center items-center 
-  w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28
-  bg-teal-400 rounded-full shadow-lg transition transform hover:scale-110
-  hidden sm:flex mt-30"
->
-
+    <button
+      className="relative flex justify-center items-center 
+      w-35 h-35 bg-teal-400 rounded-full shadow-lg transition transform hover:scale-110
+      sm:hidden"
+    >
       {/* ✅ Oq tashqi chiziq va yozuv */}
-      <svg
-        className="absolute w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"
-        viewBox="0 0 200 200"
-      >
+      <svg className="absolute w-37 h-37" viewBox="0 0 200 200">
         <circle
           cx="100"
           cy="100"
-          r="65"
+          r="60"
           fill="none"
           stroke="white"
           strokeWidth="3"
@@ -44,23 +39,23 @@ export default function PlayButton() {
           <path
             id="circlePath"
             d="M 100, 100
-              m -70, 0
-              a 70,70 0 1,1 140,0
-              a 70,70 0 1,1 -140,0"
+              m -65, 0
+              a 65,65 0 1,1 130,0
+              a 65,65 0 1,1 -130,0"
           />
         </defs>
         <text
           ref={textRef}
           fill="white"
-          fontSize="25"
-          fontWeight=" Inter"
-          style={{ letterSpacing: "8px" }}
+          fontSize="17"
+          fontWeight="bold"
+          style={{ letterSpacing: "10px" }}
         >
           <textPath xlinkHref="#circlePath">STUDIO BUSINESS AGENCY</textPath>
         </text>
       </svg>
 
-      <img src={play} alt="play logo" className="w-4 md:w-4 lg:w-5" />
+      <img src={play} alt="play logo" className="w-6" />
     </button>
   );
 }

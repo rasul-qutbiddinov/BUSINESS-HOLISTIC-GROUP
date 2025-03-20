@@ -4,7 +4,7 @@ import { SwiperSlide } from "swiper/react";
 const TestimonialsItemLoader = () => {
   return (
     <SwiperSlide className="h-full flex">
-      <div className="relative mt-6 bg-gray-800 text-white p-8 rounded-2xl shadow-lg max-w-md w-full h-full flex flex-col justify-between min-h-[450px] animate-pulse">
+      <div className="relative mt-6 text-white p-8 rounded-2xl shadow-lg max-w-md w-full h-full flex flex-col justify-between min-h-[450px] animate-pulse">
         <div>
           {/* Placeholder for User Avatar */}
           <div className="w-12 h-12 bg-gray-600 rounded-full mb-4"></div>

@@ -54,7 +54,7 @@ const TestimonialsItem = ({ id: propId }) => {
     cardData.expand?.description?.[lang] ||
     cardData.expand?.description?.uz ||
     "No testimonial available";
-
+ 
   const baseUrl = "https://back.holistic.saidoff.uz/api/files/";
   const imageUrl = cardData.image?.length
     ? `${baseUrl}${cardData.collectionId}/${cardData.id}/${cardData.image[0]}`

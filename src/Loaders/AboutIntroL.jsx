@@ -2,7 +2,7 @@ import React from "react";
 
 const AboutIntroLoader = () => {
   return (
-    <div className="py-16 px-8 bg-gray-900 text-white animate-pulse">
+    <div className="py-16 px-8 text-white animate-pulse">
       {/* Logo Loader */}
       <div className="text-center mb-12">
         <div className="h-[120px] md:h-[150px] w-[120px] md:w-[150px] bg-gray-700 rounded-full mx-auto mb-4"></div>

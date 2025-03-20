@@ -2,7 +2,7 @@ import React from "react";
 
 const TestimonialsCardLoader = () => {
   return (
-    <section className="py-16 relative bg-gray-900 animate-pulse">
+    <section className="py-16 relative animate-pulse">
       <div className="container mx-auto px-4 text-center">
         {/* Title Loader */}
         <div className="h-10 w-3/4 bg-gray-600 mx-auto rounded-md mb-4"></div>

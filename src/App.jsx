@@ -8,11 +8,14 @@ import Contact from "./Contact/contact";
 import Comments from "./Comments/comments";
 import BackToTopButton from "./components/Back-to-top";
 import Navbar from "./components/navbar";
+import ScrollToTop from "./components/ScrolToTop"; // ✅ Scroll to top komponenti
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-slate-950 relative">
+    <div className="min-h-screen bg-[#012B3D] relative">
       <Navbar />
+      <ScrollToTop />{" "}
+      {/* ✅ Har bir sahifa yuklanganda yuqoriga skroll qiladi */}
       <Routes>
         {/* 🌍 Default tilni `/uz` ga yo‘naltiramiz */}
         <Route path="/" element={<Navigate to="/uz" replace />} />
