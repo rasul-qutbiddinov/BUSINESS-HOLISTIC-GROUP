@@ -2,6 +2,7 @@ import React from "react";
 import TestimonialsCard from "../Home/testimonials";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import CommentsTitleL from "../Loaders/CommentsTitleL";
 const Comments = () => {
 
 const { lang } = useParams();
@@ -15,7 +16,7 @@ const { lang } = useParams();
   });
 
   if (isLoading) {
-    return <p className="text-white text-center">Yuklanmoqda...</p>;
+    return <CommentsTitleL/>
   }
 
   if (isError) {
@@ -23,7 +24,6 @@ const { lang } = useParams();
     return <p className="text-white text-center">Xatolik yuz berdi...</p>;
   }
 
-  // Data validatsiyasi yaxshilandi va aniqlashtirildi
   const record = data || {};
 
   const title =

@@ -76,3 +76,10 @@ body {
     animation: spin 10s linear infinite;
     transform-origin: center;
 }
+/* ✅ Title'ga outline stroke + blur efekti */
+.stroke-text {
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.2);
+    /* Oq outline */
+    text-shadow: 4px 4px 10px rgba(255, 255, 255, 0.2);
+    /* Blur efekti */
+}
