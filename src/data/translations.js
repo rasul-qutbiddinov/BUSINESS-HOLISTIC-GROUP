@@ -17,7 +17,7 @@ export const FooterTranslations = {
   home: { uz: "Asosiy", ru: "Главная", en: "Home" },
   about: { uz: "Biz haqimizda", ru: "О нас", en: "About" },
   services: { uz: "Xizmatlar", ru: "Услуги", en: "Services" },
-  contact: { uz: "Bog'lanish", ru: "Контакты", en: "Contact" },
+  contact: { uz: "Bog'lanish", ru: "Контакты", en: "Contacts" },
   comments: { uz: "Fikrlar", ru: "Комментарии", en: "Comments" },
 };
 export const AboutTranslations = {
