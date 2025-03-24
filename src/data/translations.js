@@ -42,15 +42,74 @@ export const AboutTranslations = {
     en: "Call",
   },
 };
+// src/data/translations.js (yoki mavjud faylingizga qo‘shing)
+
 export const ContactTranslations = {
+  heading: {
+    uz: "Bog'lanish",
+    ru: "Контакты",
+    en: "Contact",
+  },
+  subheading: {
+    uz: "Ma'lumot uchun",
+    ru: "Для справки",
+    en: "For reference",
+  },
+  description: {
+    uz: "Biz korporativ saytlar va veb-ilovalar yaratamiz.",
+    ru: "Мы разрабатываем корпоративные сайты и веб-приложения.",
+    en: "We develop websites with high quality, from corporate websites to web applications.",
+  },
+  fullName: {
+    uz: "To'liq ism",
+    ru: "Полное имя",
+    en: "Full name",
+  },
+  email: {
+    uz: "Elektron pochta",
+    ru: "Электронная почта",
+    en: "Your email",
+  },
+  selectService: {
+    uz: "Xizmatni tanlang",
+    ru: "Выберите услугу",
+    en: "Service selection",
+  },
+  submit: {
+    uz: "Yuborish",
+    ru: "Отправить",
+    en: "Submit",
+  },
+  successMessage: {
+    uz: "Forma muvaffaqiyatli yuborildi!",
+    ru: "Форма успешно отправлена!",
+    en: "Form submitted successfully!",
+  },
+  address: {
+    uz: "Dublin, Irlandiya",
+    ru: "Дублин, Ирландия",
+    en: "Dublin, Ireland",
+  },
+  phone: {
+    uz: "+353 1 234 5678",
+    ru: "+353 1 234 5678",
+    en: "+353 1 234 5678",
+  },
+  emailAddress: {
+    uz: "saidoff@gmail.com",
+    ru: "saidoff@gmail.com",
+    en: "saidoff@gmail.com",
+  },
+};
+export const HomeContactTranslations = {
   stayInTheKnow: {
     uz: "Yangiliklardan xabardor bo‘ling",
-    ru: "Будьте в курсе событий",
+    ru: "Будьте в курсе новостей",
     en: "Stay in the know",
   },
   contactUs: {
-    uz: "Biz bilan bog‘lanish",
-    ru: "Свяжитесь с нами",
+    uz: "Biz bilan bog'laning",
+    ru: "Связаться с нами",
     en: "Contact Us",
   },
   submit: {
@@ -61,12 +120,11 @@ export const ContactTranslations = {
   successMessage: {
     uz: "Ma'lumot muvaffaqiyatli yuborildi!",
     ru: "Данные успешно отправлены!",
-    en: "Information sent successfully!",
+    en: "Form submitted successfully!",
   },
   errorMessage: {
     uz: "Iltimos, to'liq ma'lumot kiriting!",
-    ru: "Пожалуйста, введите полные данные!",
-    en: "Please enter complete information!",
+    ru: "Пожалуйста, введите все данные!",
+    en: "Please fill in all required fields!",
   },
 };
-
