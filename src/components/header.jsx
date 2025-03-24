@@ -10,11 +10,11 @@ import PlayButton from "../components/playbtn";
 import MobilePlayButton from "../components/playbtnmobile"; // ✅ Mobil versiya uchun PlayButton
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import HeaderLoader from "../Loaders/HeaderL";
+import { HeaderTranslations } from "../data/translations"; // ✅ Tarjimalarni import qilish
 
 export default function Header() {
   const { parseHTMLString } = useParseHTML();
-  const { i18n } = useTranslation();
-  const { lang } = useLanguage();
+  const { lang } = useLanguage(); // 🔹 Hozirgi tilni olish
 
   const { error, data, isError, isSuccess } = useQuery({
     queryKey: ["hero"],
@@ -32,14 +32,6 @@ export default function Header() {
   const collectionName = record?.collectionId || "home_page";
   const id = record?.id || "";
   const image = record?.image || "";
-
-  const languageMap = {
-    uz: "uz",
-    en: "en",
-    ru: "ru",
-  };
-
-  const currentLanguage = languageMap[i18n.language] || "uz";
 
   const title =
     record?.expand?.title?.[lang] ||
@@ -76,20 +68,21 @@ export default function Header() {
               dangerouslySetInnerHTML={{ __html: parseHTMLString(description) }}
             ></p>
 
+            {/* ✅ Tarjima qilingan buttonlar */}
             <div className="flex flex-wrap justify-center md:justify-start gap-2 md:gap-4">
               <button className="bg-gray-700 px-4 md:px-6 py-2 rounded-xl hover:bg-teal-400 transition">
-                Get Started
+                {HeaderTranslations.getStarted[lang]}{" "}
+                {/* 🔥 Tarjima chiqariladi */}
               </button>
               <button className="bg-gray-700 px-4 md:px-6 py-2 rounded-xl font-medium hover:bg-teal-400 transition">
-                See Our Work
+                {HeaderTranslations.seeOurWork[lang]}{" "}
+                {/* 🔥 Tarjima chiqariladi */}
               </button>
             </div>
           </div>
 
           {/* ✅ Rasm (faqat 400px dan kattaroq ekranlar uchun) */}
-          <div
-            className="flex-1 relative w-full max-w-md md:max-w-lg lg:max-w-xl items-center justify-center hidden sm:block"
-          >
+          <div className="flex-1 relative w-full max-w-md md:max-w-lg lg:max-w-xl items-center justify-center hidden sm:block">
             {image ? (
               <div className="relative rounded-3xl shadow-lg overflow-hidden max-h-[300px] md:max-h-[500px]">
                 <LazyLoadImage

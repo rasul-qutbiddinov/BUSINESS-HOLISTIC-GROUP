@@ -1,4 +1,3 @@
-import { FaPlay } from "react-icons/fa";
 import { useEffect, useRef } from "react";
 import play from "../assets/Vector.png";
 
@@ -18,16 +17,15 @@ export default function PlayButton() {
   }, []);
 
   return (
-   <button
-  className="relative justify-center items-center 
-  w-16 h-16 md:w-20 md:h-20 lg:w-28 lg:h-28
-  bg-teal-400 rounded-full shadow-lg transition transform hover:scale-110
-  hidden sm:flex mt-30"
->
-
+    <button
+      className="relative justify-center items-center 
+        w-14 h-14 sm:w-22 sm:h-22 md:w-22 md:h-22 lg:w-26 lg:h-26
+        bg-teal-400 rounded-full shadow-lg transition transform hover:scale-110
+        hidden sm:flex mt-30"
+    >
       {/* ✅ Oq tashqi chiziq va yozuv */}
       <svg
-        className="absolute w-20 h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"
+        className="absolute w-14 h-14 sm:w-22 sm:h-22 md:w-22 md:h-22 lg:w-26 lg:h-26"
         viewBox="0 0 200 200"
       >
         <circle
@@ -52,15 +50,15 @@ export default function PlayButton() {
         <text
           ref={textRef}
           fill="white"
-          fontSize="25"
-          fontWeight=" Inter"
-          style={{ letterSpacing: "8px" }}
+          className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold "
+          style={{ letterSpacing: "10px" }}
         >
           <textPath xlinkHref="#circlePath">STUDIO BUSINESS AGENCY</textPath>
         </text>
       </svg>
 
-      <img src={play} alt="play logo" className="w-4 md:w-4 lg:w-5" />
+      {/* ✅ Play ikonkasi ekran o‘lchamiga mos ravishda kichrayadi */}
+      <img src={play} alt="play logo" className="w-2 sm:w-3 md:w-4 lg:w-5" />
     </button>
   );
 }

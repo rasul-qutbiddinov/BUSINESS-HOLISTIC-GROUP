@@ -68,7 +68,7 @@ const TestimonialsItem = ({ id: propId }) => {
             <img src={comment} alt="logo" loading="lazy" />
           </div>
           <p
-            className="mb-6 text-sm md:text-base leading-relaxed"
+            className="mb-6 line-clamp-10 text-sm md:text-base leading-relaxed "
             dangerouslySetInnerHTML={{
               __html: parseHTMLString(testimonialText),
             }}

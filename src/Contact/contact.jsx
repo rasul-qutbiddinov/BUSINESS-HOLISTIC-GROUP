@@ -2,67 +2,12 @@ import React, { useState } from "react";
 import { MapPin, Mail, Phone, Rocket, CheckCircle } from "lucide-react";
 import { GoogleMap, LoadScriptNext, Marker } from "@react-google-maps/api";
 import { useForm } from "react-hook-form";
-
-const containerStyle = {
-  width: "100%",
-  height: "300px",
-  borderRadius: "10px",
-};
-
-const center = {
-  lat: 41.3335781,
-  lng: 69.2430154,
-};
-
-const options = {
-  styles: [
-    {
-      elementType: "geometry",
-      stylers: [{ color: "#012B3D", }],
-    },
-    {
-      elementType: "labels.text.stroke",
-      stylers: [{ color: "#012B3D" }],
-    },
-    {
-      elementType: "labels.text.fill",
-      stylers: [{ color: "#ffffff" }],
-    },
-    {
-      featureType: "administrative",
-      elementType: "geometry",
-      stylers: [{ visibility: "off" }],
-    },
-    {
-      featureType: "poi",
-      elementType: "labels",
-      stylers: [{ visibility: "off" }],
-    },
-    {
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [{ color: "#013D54" }],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.icon",
-      stylers: [{ visibility: "off" }],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.text.fill",
-      stylers: [{ color: "#ffffff" }],
-    },
-    {
-      featureType: "water",
-      elementType: "geometry",
-      stylers: [{ color: "#011727" }],
-    },
-  ],
-};
-
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import useParseHTML from "../components/hooks"; // ✅ HTML parsing hook
 
 const Contact = () => {
+  const { parseHTMLString } = useParseHTML();
   const {
     register,
     handleSubmit,
@@ -72,12 +17,34 @@ const Contact = () => {
 
   const [showNotification, setShowNotification] = useState(false);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (formData) => {
+    console.log(formData);
     setShowNotification(true);
     reset();
     setTimeout(() => setShowNotification(false), 3000);
   };
+
+  // Fetch services data
+  const { lang } = useParams();
+  const { error, data, isError, isLoading } = useQuery({
+    queryKey: ["services"],
+    queryFn: () =>
+      fetch(
+        "https://back.holistic.saidoff.uz/api/collections/services/records?expand=title"
+      ).then((res) => res.json()),
+  });
+
+  if (isLoading) {
+    return <p className="text-white text-center">Yuklanmoqda...</p>;
+  }
+
+  if (isError) {
+    console.error("Error fetching data:", error);
+    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
+  }
+
+  const records = data?.items || [];
+  console.log("Services data:", records);
 
   return (
     <div className="pt-32 px-4 md:px-8 lg:px-16 xl:px-24 relative">
@@ -92,7 +59,7 @@ const Contact = () => {
           <h3 className="text-sm text-teal-500 font-semibold mb-2 uppercase tracking-wide">
             For reference
           </h3>
-          <h2 className="text-2xl md:text-4xl font-bold mb-4">Contact us</h2>
+          <h2 className="text-2xl md:text-4xl font-bold mb-4">Contact</h2>
           <p className="text-white/80 mx-auto">
             We develop websites with high quality, from corporate websites to
             web applications.
@@ -135,12 +102,20 @@ const Contact = () => {
               {...register("service", { required: "Please select a service" })}
             >
               <option value="">Service selection</option>
-              <option value="web">Web Development</option>
-              <option value="mobile">Mobile Development</option>
-              <option value="design">UI/UX Design</option>
-              <option value="seo">SEO Optimization</option>
-              <option value="ecommerce">E-commerce Solutions</option>
-              <option value="cloud">Cloud Services</option>
+              {records.map((services) => (
+                <option
+                  key={services.id}
+                  value={
+                    services.expand?.title?.[lang] ||
+                    services.expand?.title?.uz ||
+                    "No title available"
+                  }
+                >
+                  {parseHTMLString(
+                    services.expand?.title?.[lang] || "No title available"
+                  )}
+                </option>
+              ))}
             </select>
             {errors.service && (
               <span className="text-red-500">{errors.service.message}</span>
@@ -192,3 +167,47 @@ const Contact = () => {
 };
 
 export default Contact;
+
+const containerStyle = {
+  width: "100%",
+  height: "300px",
+  borderRadius: "10px",
+};
+
+const center = {
+  lat: 41.3335781,
+  lng: 69.2430154,
+};
+
+const options = {
+  styles: [
+    { elementType: "geometry", stylers: [{ color: "#012B3D" }] },
+    { elementType: "labels.text.stroke", stylers: [{ color: "#012B3D" }] },
+    { elementType: "labels.text.fill", stylers: [{ color: "#ffffff" }] },
+    {
+      featureType: "administrative",
+      elementType: "geometry",
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "poi",
+      elementType: "labels",
+      stylers: [{ visibility: "off" }],
+    },
+    {
+      featureType: "road",
+      elementType: "geometry",
+      stylers: [{ color: "#013D54" }],
+    },
+    {
+      featureType: "road",
+      elementType: "labels.text.fill",
+      stylers: [{ color: "#ffffff" }],
+    },
+    {
+      featureType: "water",
+      elementType: "geometry",
+      stylers: [{ color: "#011727" }],
+    },
+  ],
+};

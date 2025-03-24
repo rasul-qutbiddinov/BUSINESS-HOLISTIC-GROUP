@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Rocket, CheckCircle, XCircle } from "lucide-react";
+import { ContactTranslations } from "../data/contact"; // ✅ Tarjima ma'lumotlari
+import { useLanguage } from "../hooks/useLanguage"; // ✅ Hozirgi tilni olish uchun
 
 const ContactCard = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+998");
   const [toast, setToast] = useState(null); // Toast uchun holat
+
+  const { language: lang } = useLanguage(); // ✅ Hozirgi tilni olish
 
   const handlePhoneChange = (e) => {
     const input = e.target.value.replace(/\D/g, "");
@@ -19,14 +23,18 @@ const ContactCard = () => {
     if (name.trim() && phone.length >= 13) {
       setToast({
         type: "success",
-        message: "Ma'lumot muvaffaqiyatli yuborildi!",
+        message:
+          ContactTranslations[lang]?.successMessage ||
+          "Ma'lumot muvaffaqiyatli yuborildi!",
       });
       setName("");
       setPhone("+998");
     } else {
       setToast({
         type: "error",
-        message: "Iltimos, to'liq ma'lumot kiriting!",
+        message:
+          ContactTranslations[lang]?.errorMessage ||
+          "Iltimos, to'liq ma'lumot kiriting!",
       });
     }
 
@@ -38,22 +46,23 @@ const ContactCard = () => {
   return (
     <div className="px-8 py-16 bg-white text-gray-800">
       <section className="px-4 md:px-8 py-8 md:py-12 bg-white flex flex-col items-center justify-center gap-6 relative max-w-[1920px] mx-auto">
-        {/* Sarlavha va Contact Us */}
+        {/* ✅ Sarlavha va Contact Us */}
         <div className="flex flex-col sm:flex-row justify-between items-center w-full max-w-4xl mb-4 text-center sm:text-left">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-            Stay in the know:
+            {ContactTranslations[lang]?.stayInTheKnow || "Stay in the know"}{" "}
+            {/* ✅ To‘g‘rilandi */}
           </h2>
           <a
             href="/contact"
             className="text-teal-500 text-sm font-semibold hover:underline mt-2 sm:mt-0"
           >
-            CONTACT US
+            {ContactTranslations[lang]?.contactUs || "Contact Us"}{" "}
+            {/* ✅ To‘g‘rilandi */}
           </a>
         </div>
 
-        {/* Forma bo'limi */}
+        {/* ✅ Forma bo'limi */}
         <div className="bg-[#012B3D] text-white p-6 md:p-10 rounded-2xl shadow-lg flex flex-col md:flex-row items-center gap-4 w-full max-w-4xl">
-          {/* Inputlar va submit tugmasi */}
           <div className="flex flex-col md:flex-row items-center gap-4 w-full">
             <input
               type="text"
@@ -71,16 +80,19 @@ const ContactCard = () => {
               pattern="\+998[0-9]*"
               className="bg-[#011727] text-white rounded-md p-2 outline-none border-2 border-transparent focus:border-teal-500 transition-colors flex-1 w-full md:w-auto max-w-xs md:max-w-none h-[42px]"
             />
+
+            {/* ✅ Tarjima ishlashi uchun to‘g‘rilangan submit tugmasi */}
             <button
               onClick={handleSubmit}
               className="bg-teal-400 text-white px-4 md:px-6 py-2 rounded-lg hover:bg-teal-300 flex items-center gap-2 transition-colors w-full md:w-auto h-[42px]"
             >
-              Submit <Rocket size={16} />
+              {ContactTranslations[lang]?.submit || "Submit"}{" "}
+              <Rocket size={16} /> {/* ✅ To‘g‘rilandi */}
             </button>
           </div>
         </div>
 
-        {/* Toast - xabar */}
+        {/* ✅ Toast - xabar */}
         {toast && (
           <div
             className={`fixed ${

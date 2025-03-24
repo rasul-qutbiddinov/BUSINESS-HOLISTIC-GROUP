@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "../index.css";
 import { useQuery } from "@tanstack/react-query";
- import SocialMediaLoader from "../Loaders/HeaderSocialsL"; // ✅ Loader import qildik
+import SocialMediaLoader from "../Loaders/HeaderSocialsL"; // ✅ Loader import qildik
 
 export default function SocialMediaScroll() {
   const scrollRef = useRef(null);
@@ -27,12 +27,9 @@ export default function SocialMediaScroll() {
       ).then((res) => res.json()),
   });
 
-
-
- if (isLoading) {
-   return <SocialMediaLoader />;
- }
-
+  if (isLoading) {
+    return <SocialMediaLoader />;
+  }
 
   if (isError) {
     console.error("Error fetching data:", error);

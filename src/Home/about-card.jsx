@@ -6,10 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import AboutCardLoader from "../Loaders/AboutSectionL"; // ✅ Loader import qildik
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { AboutTranslations } from "../data/translations"; // ✅ Tarjimalarni import qilish
 
 const AboutCard = () => {
   const { parseHTMLString } = useParseHTML();
-  const { lang } = useParams();
+  const { lang } = useParams(); // 🔹 Hozirgi tilni olish
 
   const { error, data, isError, isLoading } = useQuery({
     queryKey: ["about_us"],
@@ -58,7 +59,7 @@ const AboutCard = () => {
         <div className="grid grid-flow-col grid-rows-3 gap-6 relative z-10 w-full max-w-6xl">
           {/* Image 1 - bottom left */}
           {images[0] && (
-            <div className="row-span-2 row-end-3 hidden sm:inline-block relative">
+            <div className="row-span-2 row-end-3 hidden sm:inline-block relative duration-500 ease-in-out hover:scale-105">
               <LazyLoadImage
                 src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${images[0]}`}
                 className="rounded-2xl shadow-lg object-cover w-full max-w-md h-100 border-4 border-transparent transition-all duration-300 ease-in-out hover:scale-105"
@@ -73,7 +74,7 @@ const AboutCard = () => {
 
           {/* Image 2 - top right */}
           {images[1] && (
-            <div className="row-span-2 row-start-2 hidden sm:inline-block relative">
+            <div className="row-span-2 row-start-2 hidden sm:inline-block relative duration-500 ease-in-out hover:scale-105">
               <LazyLoadImage
                 src={`https://back.holistic.saidoff.uz/api/files/${collectionName}/${id}/${images[1]}`}
                 className="rounded-2xl shadow-lg object-cover w-full max-w-md h-100 border-4 border-transparent transition-all duration-300 ease-in-out hover:scale-105"
@@ -99,9 +100,14 @@ const AboutCard = () => {
                         d="M 100,100 m -75,0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
                       />
                     </defs>
-                    <text fill="#0D3B66" fontSize="30" fontWeight="bold">
+                    <text
+                      fill="#0D3B66"
+                      fontWeight="bold"
+                      style={{ letterSpacing: "15px", fontSize: "30px" }}
+                    >
                       <textPath href="#circlePath">
-                        FRIENDLY TEAM FRIENDLY TEAM FRIENDLY TEAM FRIENDLY TEAM
+                        {AboutTranslations.friendlyTeam[lang]}{" "}
+                        {/* 🔥 Tarjima */}
                       </textPath>
                     </text>
                   </g>
@@ -111,7 +117,8 @@ const AboutCard = () => {
 
             {/* Title and Description */}
             <div className="text-sm font-semibold text-teal-500 uppercase tracking-wide flex items-center gap-2">
-              <span className="h-px w-8 bg-teal-500"></span> IN THE WORLD
+              <span className="h-px w-8 bg-teal-500"></span>
+              {AboutTranslations.inTheWorld[lang]} {/* 🔥 Tarjima */}
             </div>
             <h2
               className="text-3xl md:text-4xl font-bold text-gray-800"
@@ -127,10 +134,12 @@ const AboutCard = () => {
             {/* Buttons */}
             <div className="mt-6 flex flex-col sm:flex-row gap-4">
               <button className="bg-teal-500 text-white px-6 py-2 rounded-lg hover:bg-teal-600 flex items-center gap-2 transition w-full sm:w-auto">
-                <Edit2 size={16} /> Fill in brief
+                <Edit2 size={16} /> {AboutTranslations.fillBrief[lang]}{" "}
+                {/* 🔥 Tarjima */}
               </button>
               <button className="bg-gray-200 text-teal-600 px-6 py-2 rounded-lg hover:bg-teal-500 hover:text-white flex items-center gap-2 transition w-full sm:w-auto">
-                <Phone size={16} /> Call
+                <Phone size={16} /> {AboutTranslations.call[lang]}{" "}
+                {/* 🔥 Tarjima */}
               </button>
             </div>
           </div>

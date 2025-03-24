@@ -1,12 +1,12 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { Facebook, Instagram, Linkedin, Send } from "lucide-react";
 import Logo from "../assets/LOGO.png";
+import { useLanguage } from "../languageContext"; // ✅ Tilni olish
+import { FooterTranslations } from "../data/translations"; // ✅ Tarjimalarni olish
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-
-  
-  const { t } = useTranslation();
+  const { language: lang } = useLanguage(); // 🔹 Hozirgi tilni olish
 
   return (
     <div className="container mx-auto px-4 md:px-8">
@@ -15,33 +15,15 @@ const Footer = () => {
           {/* Yuqori qism: Navigatsiya va Ijtimoiy tarmoqlar */}
           <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 md:gap-6 text-center md:text-left">
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-sm">
-              <a href="/" className="hover:text-teal-400 transition-colors">
-                {t("home")}
-              </a>
-              <a
-                href="/about"
-                className="hover:text-teal-400 transition-colors"
-              >
-                {t("about")}
-              </a>
-              <a
-                href="/services"
-                className="hover:text-teal-400 transition-colors"
-              >
-                {t("services")}
-              </a>
-              <a
-                href="/contact"
-                className="hover:text-teal-400 transition-colors"
-              >
-                {t("contact")}
-              </a>
-              <a
-                href="/comments"
-                className="hover:text-teal-400 transition-colors"
-              >
-                {t("comments")}
-              </a>
+              {Object.entries(FooterTranslations).map(([key, value]) => (
+                <Link
+                  key={key}
+                  to={`/${lang}/${key}`} // 🔹 Har bir sahifaga mos yo‘naltirish
+                  className="hover:text-teal-400 transition-colors"
+                >
+                  {value[lang]} {/* 🔥 Tarjima chiqariladi */}
+                </Link>
+              ))}
             </div>
 
             <div className="flex items-center gap-4 sm:gap-6">
@@ -71,6 +53,8 @@ const Footer = () => {
               </a>
             </div>
           </div>
+
+          {/* Pastgi qism: Logo va aloqa ma’lumotlari */}
           <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 md:gap-6 border-t border-white/20 pt-4 md:pt-6 text-center md:text-left">
             <div className="flex items-center gap-2 mb-4 md:mb-0">
               <img
@@ -83,7 +67,6 @@ const Footer = () => {
               </span>
             </div>
 
-            {/* O'ng tomon: Email va telefon */}
             <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-white/80">
               <a
                 href="mailto:businessholistic@group"
