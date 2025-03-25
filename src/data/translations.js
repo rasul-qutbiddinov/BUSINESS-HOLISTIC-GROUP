@@ -17,9 +17,10 @@ export const FooterTranslations = {
   home: { uz: "Asosiy", ru: "Главная", en: "Home" },
   about: { uz: "Biz haqimizda", ru: "О нас", en: "About" },
   services: { uz: "Xizmatlar", ru: "Услуги", en: "Services" },
-  contact: { uz: "Bog'lanish", ru: "Контакты", en: "Contacts" },
+  contacts: { uz: "Bog'lanish", ru: "Контакты", en: "Contacts" }, // ✅ to‘g‘rilandi
   comments: { uz: "Fikrlar", ru: "Комментарии", en: "Comments" },
 };
+
 export const AboutTranslations = {
   friendlyTeam: {
     uz: "DO'STLIK JAMOASI ",
