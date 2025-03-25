@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from "react";
 import Logo from "../assets/LOGO.png";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -26,6 +27,13 @@ const Navbar = () => {
       document.documentElement.style.overflow = "auto";
     }
   };
+  useEffect(() => {
+    const pathLang = location.pathname.split("/")[1]; 
+    if (["uz", "ru", "en"].includes(pathLang)) {
+      changeLanguage(pathLang); // 🌐 Contextga yozish
+    }
+  }, [location.pathname]);
+
 
   const handleChangeLanguage = (selectedLang) => {
     changeLanguage(selectedLang);
