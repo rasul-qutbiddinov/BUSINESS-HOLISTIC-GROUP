@@ -63,10 +63,14 @@ const ContactCard = () => {
               value={name}
               onChange={(e) => {
                 // Raqamlarni olib tashlaymiz
-                const onlyLetters = e.target.value.replace(/[0-9]/g, "");
+                const onlyLetters = e.target.value.replace(
+                  /[^a-zA-Zа-яА-ЯёЁ\s']/g,
+                  ""
+                );
+
                 setName(onlyLetters);
               }}
-              placeholder="Your name"
+              placeholder={t.yourname[lang] || t.yourname.en}
               className="bg-[#011727] text-white rounded-md p-2 outline-none border-2 border-transparent focus:border-teal-500 transition-colors flex-1 w-full md:w-auto max-w-xs md:max-w-none h-[42px]"
             />
 
@@ -75,6 +79,7 @@ const ContactCard = () => {
               value={phone}
               onChange={handlePhoneChange}
               placeholder="+998 -- --- -- --"
+              maxLength={13}
               inputMode="numeric"
               pattern="\+998[0-9]*"
               className="bg-[#011727] text-white rounded-md p-2 outline-none border-2 border-transparent focus:border-teal-500 transition-colors flex-1 w-full md:w-auto max-w-xs md:max-w-none h-[42px]"

@@ -59,14 +59,23 @@ const About = () => {
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value.replace(/[0-9]/g, ""))}
-            placeholder="Your name"
-            className="bg-[#011727] text-white rounded-md p-2 w-full sm:flex-1 h-[42px]"
+            onChange={(e) => {
+              // Raqamlarni olib tashlaymiz
+              const onlyLetters = e.target.value.replace(
+                /[^a-zA-Zа-яА-ЯёЁ\s']/g,
+                ""
+              );
+
+              setName(onlyLetters);
+            }}
+            placeholder={t.yourname[lang] || t.yourname.en}
+            className="bg-[#011727] text-white rounded-md p-2 outline-none border-2 border-transparent focus:border-teal-500 transition-colors flex-1 w-full md:w-auto max-w-xs md:max-w-none h-[42px]"
           />
           <input
             type="text"
             value={phone}
             onChange={handlePhoneChange}
+            maxLength={13}
             placeholder="+998 -- --- -- --"
             className="bg-[#011727] text-white rounded-md p-2 w-full sm:flex-1 h-[42px]"
           />

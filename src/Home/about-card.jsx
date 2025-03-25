@@ -6,9 +6,20 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import AboutCardLoader from "../Loaders/AboutSectionL"; // ✅ Loader import qildik
 import { LazyLoadImage } from "react-lazy-load-image-component";
+
+  import { useNavigate } from "react-router-dom";
 import { AboutTranslations } from "../data/translations"; // ✅ Tarjimalarni import qilish
 
 const AboutCard = () => {
+
+
+  // komponent ichida
+  const navigate = useNavigate();
+
+  const handleGoToContact = () => {
+    navigate(`/${lang}/contacts`);
+  };
+
 
   const textStyle = {
     uz: { letterSpacing: "13px", fontSize: "24px" },
@@ -145,9 +156,11 @@ const AboutCard = () => {
                 <Edit2 size={16} /> {AboutTranslations.fillBrief[lang]}{" "}
                 {/* 🔥 Tarjima */}
               </button>
-              <button className="bg-gray-200 text-teal-600 px-6 py-2 rounded-lg hover:bg-teal-500 hover:text-white flex items-center gap-2 transition w-full sm:w-auto">
-                <Phone size={16} /> {AboutTranslations.call[lang]}{" "}
-                {/* 🔥 Tarjima */}
+              <button
+                onClick={handleGoToContact}
+                className="bg-gray-200 text-teal-600 px-6 py-2 rounded-lg hover:bg-teal-500 hover:text-white flex items-center gap-2 transition w-full sm:w-auto"
+              >
+                <Phone size={16} /> {AboutTranslations.call[lang]}
               </button>
             </div>
           </div>

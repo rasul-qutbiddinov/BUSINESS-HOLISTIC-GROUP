@@ -127,6 +127,11 @@ export const HomeContactTranslations = {
     ru: "Пожалуйста, введите полную информацию!",
     en: "Please fill in all the required fields!",
   },
+  yourname: {
+    uz: "Ismingiz",
+    ru: "Ваше имя",
+    en: "Your name",
+  },
 };
 export const PartnerTranslations = {
   ourPartners: {
@@ -166,4 +171,10 @@ export const AboutContactTranslations = {
     ru: "Пожалуйста, введите полную информацию!",
     en: "Please fill in all the required fields!",
   },
+  yourname: {
+    uz: "Ismingiz",
+    ru: "Ваше имя",
+    en: "Your name",
+  },
 };
+  
