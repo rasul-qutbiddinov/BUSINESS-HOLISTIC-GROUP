@@ -3,8 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import PartnerLoader from "../Loaders/AboutPartnersL"; // ✅ Loader import qildik
+import { useParams } from "react-router-dom"; // 🌐 Tilni olish
+import { PartnerTranslations } from "../data/translations"; // ✅ Tarjimalar
 
 const Partner = () => {
+  const { lang } = useParams(); // 🌐 URL'dan tilni olamiz
+
   const { error, data, isError, isLoading } = useQuery({
     queryKey: ["partners"],
     queryFn: () =>
@@ -14,7 +18,7 @@ const Partner = () => {
   });
 
   if (isLoading) {
-    return <PartnerLoader />; // ✅ Loader komponenti yuklanish vaqtida ko‘rinadi
+    return <PartnerLoader />;
   }
 
   if (isError) {
@@ -22,16 +26,17 @@ const Partner = () => {
     return <p className="text-white text-center">Xatolik yuz berdi...</p>;
   }
 
-  // Ensure data is correctly structured
   const partners = Array.isArray(data?.items) ? data.items : [];
+
+  const t = PartnerTranslations;
 
   return (
     <section className="max-w-[1200px] mx-auto text-center px-4 mb-10">
       <h3 className="text-sm text-teal-500 font-semibold mb-2 uppercase tracking-wide">
-        OUR PARTNERS
+        {t.ourPartners[lang] || t.ourPartners.en}
       </h3>
       <h2 className="text-2xl md:text-3xl font-bold mb-8">
-        Companies that believe in us
+        {t.companiesThatBelieve[lang] || t.companiesThatBelieve.en}
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
@@ -53,7 +58,9 @@ const Partner = () => {
             </div>
           ))
         ) : (
-          <p className="text-white text-center">No partners available</p>
+          <p className="text-white text-center">
+            {t.noPartners[lang] || t.noPartners.en}
+          </p>
         )}
       </div>
     </section>

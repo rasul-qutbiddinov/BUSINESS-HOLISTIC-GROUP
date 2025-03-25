@@ -22,9 +22,9 @@ export const FooterTranslations = {
 };
 export const AboutTranslations = {
   friendlyTeam: {
-    uz: "DO'STLIK JAMOASI",
-    ru: "ДРУЖНАЯ КОМАНДА",
-    en: "FRIENDLY TEAM",
+    uz: "DO'STLIK JAMOASI ",
+    ru: "ДРУЖНАЯ КОМАНДА ",
+    en: "TEAM FRIENDLY ",
   },
   inTheWorld: {
     uz: "DUNYODA",
@@ -104,11 +104,11 @@ export const ContactTranslations = {
 export const HomeContactTranslations = {
   stayInTheKnow: {
     uz: "Yangiliklardan xabardor bo‘ling",
-    ru: "Будьте в курсе новостей",
+    ru: "Будьте в курсе",
     en: "Stay in the know",
   },
   contactUs: {
-    uz: "Biz bilan bog'laning",
+    uz: "Biz bilan bog‘laning",
     ru: "Связаться с нами",
     en: "Contact Us",
   },
@@ -119,12 +119,51 @@ export const HomeContactTranslations = {
   },
   successMessage: {
     uz: "Ma'lumot muvaffaqiyatli yuborildi!",
-    ru: "Данные успешно отправлены!",
-    en: "Form submitted successfully!",
+    ru: "Информация успешно отправлена!",
+    en: "Information submitted successfully!",
   },
   errorMessage: {
     uz: "Iltimos, to'liq ma'lumot kiriting!",
-    ru: "Пожалуйста, введите все данные!",
-    en: "Please fill in all required fields!",
+    ru: "Пожалуйста, введите полную информацию!",
+    en: "Please fill in all the required fields!",
+  },
+};
+export const PartnerTranslations = {
+  ourPartners: {
+    uz: "HAMKORLARIMIZ",
+    ru: "НАШИ ПАРТНЁРЫ",
+    en: "OUR PARTNERS",
+  },
+  companiesThatBelieve: {
+    uz: "Bizga ishonadigan kompaniyalar",
+    ru: "Компании, которые нам доверяют",
+    en: "Companies that believe in us",
+  },
+  noPartners: {
+    uz: "Hamkorlar mavjud emas",
+    ru: "Партнёры отсутствуют",
+    en: "No partners available",
+  },
+};
+export const AboutContactTranslations = {
+  stayInTheKnow: {
+    uz: "Yangiliklardan xabardor bo‘ling:",
+    ru: "Будьте в курсе событий:",
+    en: "Stay in the know:",
+  },
+  submit: {
+    uz: "Yuborish",
+    ru: "Отправить",
+    en: "Submit",
+  },
+  successMessage: {
+    uz: "Ma'lumot muvaffaqiyatli yuborildi!",
+    ru: "Информация успешно отправлена!",
+    en: "Information submitted successfully!",
+  },
+  errorMessage: {
+    uz: "Iltimos, to'liq ma'lumot kiriting!",
+    ru: "Пожалуйста, введите полную информацию!",
+    en: "Please fill in all the required fields!",
   },
 };

@@ -9,6 +9,13 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import { AboutTranslations } from "../data/translations"; // ✅ Tarjimalarni import qilish
 
 const AboutCard = () => {
+
+  const textStyle = {
+    uz: { letterSpacing: "13px", fontSize: "24px" },
+    ru: { letterSpacing: "11px", fontSize: "25px" },
+    en: { letterSpacing: "20px", fontSize: "28px" },
+  };
+
   const { parseHTMLString } = useParseHTML();
   const { lang } = useParams(); // 🔹 Hozirgi tilni olish
 
@@ -100,14 +107,15 @@ const AboutCard = () => {
                         d="M 100,100 m -75,0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0"
                       />
                     </defs>
+
                     <text
                       fill="#0D3B66"
                       fontWeight="bold"
-                      style={{ letterSpacing: "15px", fontSize: "30px" }}
+                      style={textStyle[lang] || textStyle.en}
                     >
                       <textPath href="#circlePath">
-                        {AboutTranslations.friendlyTeam[lang]}{" "}
-                        {/* 🔥 Tarjima */}
+                        {AboutTranslations.friendlyTeam[lang] ||
+                          AboutTranslations.friendlyTeam.en}
                       </textPath>
                     </text>
                   </g>

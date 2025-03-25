@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { Rocket, CheckCircle, XCircle } from "lucide-react";
 import { HomeContactTranslations } from "../data/translations";
-import { useLanguage } from "../languageContext"; // ✅ Contextdan foydalanamiz
+import { useParams } from "react-router-dom";
 
 const ContactCard = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("+998");
   const [toast, setToast] = useState(null);
 
-  const { lang } = useLanguage(); // ✅ lang context orqali
+  const { lang } = useParams(); // 🌐 Tilni URL'dan olamiz
+
+  const t = HomeContactTranslations;
 
   const handlePhoneChange = (e) => {
     const input = e.target.value.replace(/\D/g, "");
@@ -23,18 +25,14 @@ const ContactCard = () => {
     if (name.trim() && phone.length >= 13) {
       setToast({
         type: "success",
-        message:
-          HomeContactTranslations[lang]?.successMessage ||
-          "Ma'lumot muvaffaqiyatli yuborildi!",
+        message: t.successMessage[lang] || t.successMessage.en,
       });
       setName("");
       setPhone("+998");
     } else {
       setToast({
         type: "error",
-        message:
-          HomeContactTranslations[lang]?.errorMessage ||
-          "Iltimos, to'liq ma'lumot kiriting!",
+        message: t.errorMessage[lang] || t.errorMessage.en,
       });
     }
 
@@ -48,13 +46,13 @@ const ContactCard = () => {
       <section className="px-4 md:px-8 py-8 md:py-12 bg-white flex flex-col items-center justify-center gap-6 relative max-w-[1920px] mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-center w-full max-w-4xl mb-4 text-center sm:text-left">
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
-            {HomeContactTranslations[lang]?.stayInTheKnow || "Stay in the know"}
+            {t.stayInTheKnow[lang] || t.stayInTheKnow.en}
           </h2>
           <a
             href={`/${lang}/contacts`}
             className="text-teal-500 text-sm font-semibold hover:underline mt-2 sm:mt-0"
           >
-            {HomeContactTranslations[lang]?.contactUs || "Contact Us"}
+            {t.contactUs[lang] || t.contactUs.en}
           </a>
         </div>
 
@@ -63,10 +61,15 @@ const ContactCard = () => {
             <input
               type="text"
               value={name}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => {
+                // Raqamlarni olib tashlaymiz
+                const onlyLetters = e.target.value.replace(/[0-9]/g, "");
+                setName(onlyLetters);
+              }}
               placeholder="Your name"
               className="bg-[#011727] text-white rounded-md p-2 outline-none border-2 border-transparent focus:border-teal-500 transition-colors flex-1 w-full md:w-auto max-w-xs md:max-w-none h-[42px]"
             />
+
             <input
               type="text"
               value={phone}
@@ -81,8 +84,7 @@ const ContactCard = () => {
               onClick={handleSubmit}
               className="bg-teal-400 text-white px-4 md:px-6 py-2 rounded-lg hover:bg-teal-300 flex items-center gap-2 transition-colors w-full md:w-auto h-[42px]"
             >
-              {HomeContactTranslations[lang]?.submit || "Submit"}{" "}
-              <Rocket size={16} />
+              {t.submit[lang] || t.submit.en} <Rocket size={16} />
             </button>
           </div>
         </div>
