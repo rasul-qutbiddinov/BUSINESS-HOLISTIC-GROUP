@@ -44,7 +44,7 @@ const AboutCard = () => {
 
   if (isError) {
     console.error("Error fetching data:", error);
-    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
+    return <p className="text-white text-center"></p>;
   }
 
   const record = data?.items?.[0] || {};

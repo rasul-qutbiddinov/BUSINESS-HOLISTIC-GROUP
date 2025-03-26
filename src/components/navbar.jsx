@@ -19,26 +19,21 @@ const Navbar = () => {
 
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
-    if (!sidebarOpen) {
-      document.body.style.overflow = "hidden"; // 🚀 Saytni scroll qilishni to‘xtatish
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto"; // ✅ Scrollni tiklash
-      document.documentElement.style.overflow = "auto";
-    }
+    document.body.style.overflow = !sidebarOpen ? "hidden" : "auto";
+    document.documentElement.style.overflow = !sidebarOpen ? "hidden" : "auto";
   };
+
   useEffect(() => {
-    const pathLang = location.pathname.split("/")[1]; 
+    const pathLang = location.pathname.split("/")[1];
     if (["uz", "ru", "en"].includes(pathLang)) {
-      changeLanguage(pathLang); // 🌐 Contextga yozish
+      changeLanguage(pathLang);
     }
   }, [location.pathname]);
-
 
   const handleChangeLanguage = (selectedLang) => {
     changeLanguage(selectedLang);
     setDropdownOpen(false);
-    closeSidebar(); // ✅ Til o'zgartirganda sidebar yopiladi
+    closeSidebar();
     const currentPath = location.pathname.split("/").slice(2).join("/");
     navigate(`/${selectedLang}/${currentPath}`);
   };
@@ -53,47 +48,60 @@ const Navbar = () => {
     document.addEventListener("mousedown", closeDropdown);
     return () => {
       document.removeEventListener("mousedown", closeDropdown);
-      document.body.style.overflow = "auto"; // ✅ Scrollni tiklash
+      document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
     };
   }, []);
 
-  // 🚀 **Yangi funksiya:** Sidebarni yopish
   const closeSidebar = () => {
     setSidebarOpen(false);
-    document.body.style.overflow = "auto"; // ✅ Scrollni tiklash
+    document.body.style.overflow = "auto";
     document.documentElement.style.overflow = "auto";
   };
 
   return (
     <>
-      {/* ✅ **Overlay** - sidebar ochilganda saytni yopish uchun */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-opacity-50 z-40 md:hidden"
-          onClick={closeSidebar} // 🚀 **Chap tomonni bosganda sidebar yopiladi**
+          onClick={closeSidebar}
         ></div>
       )}
 
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#012B3D] shadow-md w-full">
         <div className="container mx-auto px-4 md:px-8 flex justify-between items-center py-4">
-          {/* ✅ LOGO */}
           <Link to={`/${lang}`} className="flex items-center gap-2 max-w-xs">
             <img src={Logo} className="h-10 md:h-16 w-auto" alt="Logo" />
           </Link>
 
-          {/* ✅ NAV LINKS - faqat katta ekranlar (`md`) va undan katta ko‘rinadi */}
+          {/* ✅ DESKTOP LINKS */}
           <ul className="hidden md:flex gap-4 lg:gap-8 font-medium bg-[#1B4055] text-white px-4 py-2 lg:px-6 rounded-[30px] mx-auto justify-center">
-            {NavbarData.map((item, index) => (
-              <li key={index} className="hover:text-teal-300 cursor-pointer">
-                <Link to={`/${lang}/${item.text}`}>
-                  {NavbarTranslations[item.text][lang]}
-                </Link>
-              </li>
-            ))}
+            {NavbarData.map((item, index) => {
+              const path = `/${lang}/${item.text}`;
+              const currentPath = location.pathname;
+
+              const isHome =
+                item.text === "/" &&
+                (currentPath === `/${lang}` || currentPath === `/${lang}/`);
+
+              const isActive = isHome || currentPath === path;
+
+              return (
+                <li
+                  key={index}
+                  className={`cursor-pointer transition-colors ${
+                    isActive
+                      ? "text-teal-400 font-semibold"
+                      : "hover:text-teal-300"
+                  }`}
+                >
+                  <Link to={path}>{NavbarTranslations[item.text][lang]}</Link>
+                </li>
+              );
+            })}
           </ul>
 
-          {/* ✅ LANGUAGE SWITCHER */}
+          {/* ✅ LANGUAGE DROPDOWN */}
           <div className="relative hidden md:block">
             <button
               onClick={toggleDropdown}
@@ -119,13 +127,13 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* ✅ SIDEBAR TOGGLE BUTTON - faqat `md` dan kichik ekranlarda ko‘rinadi */}
+          {/* ✅ BURGER MENU */}
           <button className="md:hidden text-white" onClick={toggleSidebar}>
             {sidebarOpen ? <X size={30} /> : <Menu size={30} />}
           </button>
         </div>
 
-        {/* ✅ MOBILE SIDEBAR - faqat `sm` va `md` ekranlar uchun */}
+        {/* ✅ MOBILE SIDEBAR */}
         <div
           className={`fixed top-0 right-0 h-full w-64 bg-[#012B3D] text-white transform ${
             sidebarOpen ? "translate-x-0" : "translate-x-full"
@@ -136,16 +144,34 @@ const Navbar = () => {
           </button>
 
           <ul className="flex flex-col gap-4 px-8 py-4 text-lg">
-            {NavbarData.map((item, index) => (
-              <li key={index} className="hover:text-teal-300 cursor-pointer">
-                <Link to={`/${lang}/${item.text}`} onClick={closeSidebar}>
-                  {NavbarTranslations[item.text][lang]}
-                </Link>
-              </li>
-            ))}
+            {NavbarData.map((item, index) => {
+              const path = `/${lang}/${item.text}`;
+              const currentPath = location.pathname;
+
+              const isHome =
+                item.text === "/" &&
+                (currentPath === `/${lang}` || currentPath === `/${lang}/`);
+
+              const isActive = isHome || currentPath === path;
+
+              return (
+                <li
+                  key={index}
+                  className={`cursor-pointer transition-colors ${
+                    isActive
+                      ? "text-teal-400 font-semibold"
+                      : "hover:text-teal-300"
+                  }`}
+                >
+                  <Link to={path} onClick={closeSidebar}>
+                    {NavbarTranslations[item.text][lang]}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
 
-          {/* ✅ MOBILE LANGUAGE SWITCHER */}
+          {/* ✅ LANGUAGE SWITCHER */}
           <div className="px-8 py-4">
             <p className="text-gray-400">Tilni tanlang:</p>
             <div className="flex gap-4 mt-2">

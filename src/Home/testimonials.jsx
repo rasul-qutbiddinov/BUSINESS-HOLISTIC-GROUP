@@ -43,7 +43,7 @@ const TestimonialsCard = () => {
   }
 
   if (isError) {
-    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
+    return <p className="text-white text-center"></p>;
   }
 
   const title =

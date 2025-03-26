@@ -21,7 +21,7 @@ const ServicesCard = () => {
   // Handle errors
   if (isError) {
     console.error("Error fetching data:", error);
-    return <p className="text-white text-center">Xatolik yuz berdi...</p>;
+    return <p className="text-white text-center"></p>;
   }
 
   // Handle loading state

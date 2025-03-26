@@ -99,7 +99,6 @@ const Corusel = () => {
                 }}
                 className="rounded-xl shadow-lg object-cover h-[300px] md:h-[400px] w-full transition-transform duration-300 hover:scale-105"
               />
-            
             </SwiperSlide>
           ))
         ) : (
