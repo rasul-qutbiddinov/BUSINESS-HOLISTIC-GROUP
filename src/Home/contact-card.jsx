@@ -60,6 +60,7 @@ const ContactCard = () => {
           <div className="flex flex-col md:flex-row items-center gap-4 w-full">
             <input
               type="text"
+              maxLength={15}
               value={name}
               onChange={(e) => {
                 // Raqamlarni olib tashlaymiz

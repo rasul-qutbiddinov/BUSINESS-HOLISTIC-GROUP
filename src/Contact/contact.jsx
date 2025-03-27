@@ -74,9 +74,24 @@ const Contact = () => {
             <input
               type="text"
               placeholder={ContactTranslations.fullName[lang]}
+              maxLength={15}
+              onInput={(e) => {
+                // Faqat harflarni qoldiramiz
+                e.target.value = e.target.value.replace(
+                  /[^a-zA-Zа-яА-ЯёЁ\s']/g,
+                  ""
+                );
+              }}
               className="bg-[#011727] text-white rounded-md p-3 outline-none border-2 border-transparent focus:border-teal-500 transition-colors"
-              {...register("fullname", { required: "Full name is required" })}
+              {...register("fullname", {
+                required: "Full name is required",
+                maxLength: {
+                  value: 15,
+                  message: "Maximum 15 characters allowed",
+                },
+              })}
             />
+
             {errors.fullname && (
               <span className="text-red-500">{errors.fullname.message}</span>
             )}

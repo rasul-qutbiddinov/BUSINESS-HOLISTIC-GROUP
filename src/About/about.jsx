@@ -59,6 +59,7 @@ const About = () => {
           <input
             type="text"
             value={name}
+            maxLength={15}
             onChange={(e) => {
               // Raqamlarni olib tashlaymiz
               const onlyLetters = e.target.value.replace(

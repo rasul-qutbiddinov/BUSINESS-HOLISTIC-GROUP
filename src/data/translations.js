@@ -87,14 +87,14 @@ export const ContactTranslations = {
     en: "Form submitted successfully!",
   },
   address: {
-    uz: "Dublin, Irlandiya",
-    ru: "Дублин, Ирландия",
-    en: "Dublin, Ireland",
+    uz: "Qorasaroy 39A",
+    ru: "Qorasaroy 39A",
+    en: "Qorasaroy 39A",
   },
   phone: {
-    uz: "+353 1 234 5678",
-    ru: "+353 1 234 5678",
-    en: "+353 1 234 5678",
+    uz: "+998 93 333 00 33",
+    ru: "+998 93 333 00 33",
+    en: "+998 93 333 00 33",
   },
   emailAddress: {
     uz: "saidoff@gmail.com",

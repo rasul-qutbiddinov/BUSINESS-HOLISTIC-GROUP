@@ -1,91 +1,103 @@
 import React from "react";
-import { Facebook, Instagram, Linkedin, Send } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Send, ChevronUp } from "lucide-react";
 import Logo from "../assets/LOGO.png";
-import { useLanguage } from "../languageContext"; // ✅ Tilni olish
-import { FooterTranslations } from "../data/translations"; // ✅ Tarjimalarni olish
+import { useLanguage } from "../languageContext";
+import { FooterTranslations } from "../data/translations";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const { language: lang } = useLanguage(); // 🔹 Hozirgi tilni olish
+  const { language: lang } = useLanguage();
+
 
   return (
-    <div className="container mx-auto px-4 md:px-8">
-      <footer className="bg-[#012B3D] text-white py-6 md:py-8 mt-0">
-        <div className="max-w-[1920px] mx-auto px-4 md:px-8 flex flex-col items-center gap-6 md:gap-8">
-          {/* Yuqori qism: Navigatsiya va Ijtimoiy tarmoqlar */}
-          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 md:gap-6 text-center md:text-left">
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 text-sm">
+    <footer className="bg-[#012B3D] text-white pt-10 px-4 md:px-8 lg:px-16">
+      <div className="max-w-[1920px] mx-auto flex flex-col gap-6">
+        {/* TOP PART */}
+        <div className="flex flex-col md:flex-row justify-between gap-6">
+          {/* Left: nav + social */}
+          <div className="flex flex-col items-center md:items-start gap-4">
+            {/* Navigation Links */}
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 text-sm font-medium">
               {Object.entries(FooterTranslations).map(([key, value]) => (
                 <Link
                   key={key}
-                  to={`/${lang}/${key}`} // 🔹 Har bir sahifaga mos yo‘naltirish
-                  className="hover:text-teal-400 transition-colors"
+                  to={`/${lang}/${key}`}
+                  className="hover:text-teal-400 transition-colors uppercase tracking-wide"
                 >
-                  {value[lang]} {/* 🔥 Tarjima chiqariladi */}
+                  {value[lang]}
                 </Link>
               ))}
             </div>
 
-            <div className="flex items-center gap-4 sm:gap-6">
+            {/* Social Icons */}
+            <div className="flex gap-4">
               <a
                 href="https://www.linkedin.com/in/rasul-qutbiddinov/"
-                className="text-white hover:text-teal-400 transition-colors"
+                className="hover:text-teal-400 transition-colors"
               >
                 <Linkedin size={20} />
               </a>
-              <a
-                href="#"
-                className="text-white hover:text-teal-400 transition-colors"
-              >
+              <a href="#" className="hover:text-teal-400 transition-colors">
                 <Facebook size={20} />
               </a>
-              <a
-                href="#"
-                className="text-white hover:text-teal-400 transition-colors"
-              >
+              <a href="#" className="hover:text-teal-400 transition-colors">
                 <Instagram size={20} />
               </a>
-              <a
-                href="#"
-                className="text-white hover:text-teal-400 transition-colors"
-              >
+              <a href="#" className="hover:text-teal-400 transition-colors">
                 <Send size={20} />
               </a>
             </div>
           </div>
 
-          {/* Pastgi qism: Logo va aloqa ma’lumotlari */}
-          <div className="flex flex-col md:flex-row justify-between items-center w-full gap-4 md:gap-6 border-t border-white/20 pt-4 md:pt-6 text-center md:text-left">
-            <div className="flex items-center gap-2 mb-4 md:mb-0">
-              <img
-                src={Logo}
-                alt="Logo"
-                className="h-10 md:h-12 w-10 md:w-12 object-contain"
-              />
-              <span className="text-sm text-white/80">
-                BUSINESS HOLISTIC GROUP
-              </span>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-white/80">
-              <a
-                href="mailto:businessholistic@group"
-                className="hover:text-teal-400 transition-colors"
-              >
-                businessholistic@group
-              </a>
-              <span className="hidden sm:block">|</span>
-              <a
-                href="tel:+998997776655"
-                className="hover:text-teal-400 transition-colors"
-              >
-                +998 99 777 66 55
-              </a>
-            </div>
+          {/* Right: Email & Phone */}
+          <div className="flex flex-col items-center md:items-end justify-center gap-2 text-sm text-white/80">
+            <a
+              href="mailto:businessholistic@group"
+              className="hover:text-teal-400 transition"
+            >
+              businessholistic@group
+            </a>
+            <a
+              href="tel:+998997776655"
+              className="hover:text-teal-400 transition"
+            >
+              +998 99 777 66 55
+            </a>
           </div>
         </div>
-      </footer>
-    </div>
+
+        {/* Back to Top Button */}
+        
+
+        {/* Divider */}
+        <div className="w-full h-px bg-white/20 " />
+
+        {/* Bottom Part: logo + privacy */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pb-2">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <img
+              src={Logo}
+              alt="Logo"
+              className="h-10 md:h-12 w-10 md:w-12 object-contain"
+            />
+            <span className="text-sm text-white/80">
+              BUSINESS HOLISTIC GROUP
+            </span>
+          </div>
+
+          {/* Privacy */}
+          <div className="flex gap-6 text-sm text-white/50">
+            <a href="#" className="hover:text-white transition">
+              Privacy Policy
+            </a>
+            <a href="#" className="hover:text-white transition">
+              Terms of Service
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

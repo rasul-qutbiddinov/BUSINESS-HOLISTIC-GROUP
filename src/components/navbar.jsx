@@ -16,7 +16,7 @@ const Navbar = () => {
   const location = useLocation();
 
   const toggleDropdown = () => setDropdownOpen((prev) => !prev);
-
+      
   const toggleSidebar = () => {
     setSidebarOpen((prev) => !prev);
     document.body.style.overflow = !sidebarOpen ? "hidden" : "auto";
