@@ -50,7 +50,7 @@ const Footer = () => {
           </div>
 
           {/* Right: Email & Phone */}
-          <div className="flex flex-col items-center md:items-end justify-center gap-2 text-sm text-white/80">
+          <div className="flex flex-row items-center md:items-end justify-center gap-8 text-sm text-white/80">
             <a
               href="mailto:businessholistic@group"
               className="hover:text-teal-400 transition"
@@ -66,26 +66,19 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Back to Top Button */}
-        
-
         {/* Divider */}
         <div className="w-full h-px bg-white/20 " />
 
         {/* Bottom Part: logo + privacy */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pb-2">
+        <div className="flex flex-row ml-5 mr-5 md:flex-row justify-between items-center gap-4 pb-2">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <img
               src={Logo}
               alt="Logo"
-              className="h-10 md:h-12 w-10 md:w-12 object-contain"
+              className="h-10 md:h-12 w-10 md:w-32 object-contain"
             />
-            <span className="text-sm text-white/80">
-              BUSINESS HOLISTIC GROUP
-            </span>
           </div>
-
           {/* Privacy */}
           <div className="flex gap-6 text-sm text-white/50">
             <a href="#" className="hover:text-white transition">

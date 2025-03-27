@@ -42,7 +42,6 @@ const Contact = () => {
     console.error("Error fetching data:", error);
     return <p className="text-white text-center">Xatolik yuz berdi...</p>;
   }
-
   const records = data?.items || [];
 
   return (
@@ -165,18 +164,30 @@ const Contact = () => {
         </div>
 
         <div className="flex flex-col md:flex-row items-center md:items-start gap-10 text-white/80 mt-12">
-          <div className="flex items-center gap-4">
+          <a
+            href="https://www.google.com/maps?q=41.3335781,69.2430154"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 hover:text-teal-400 transition-colors"
+          >
             <MapPin size={24} className="text-teal-500" />
             <span>{ContactTranslations.address[lang]}</span>
-          </div>
-          <div className="flex items-center gap-4">
+          </a>
+
+          <a
+            href="email:saidoff@gmail.com"
+            className="flex items-center gap-4 hover:text-teal-400 transition-colors"
+          >
             <Mail size={24} className="text-teal-500" />
             <span>{ContactTranslations.emailAddress[lang]}</span>
-          </div>
-          <div className="flex items-center gap-4">
+          </a>
+          <a
+            href="tel:+998933330033"
+            className="flex items-center gap-4 hover:text-teal-400 transition-colors"
+          >
             <Phone size={24} className="text-teal-500" />
             <span>{ContactTranslations.phone[lang]}</span>
-          </div>
+          </a>
         </div>
       </section>
     </div>

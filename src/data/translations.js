@@ -92,9 +92,9 @@ export const ContactTranslations = {
     en: "Qorasaroy 39A",
   },
   phone: {
-    uz: "+998 93 333 00 33",
-    ru: "+998 93 333 00 33",
-    en: "+998 93 333 00 33",
+    ru: "+998933330033",
+    uz: "+998933330033",
+    en: "+998933330033",
   },
   emailAddress: {
     uz: "saidoff@gmail.com",
